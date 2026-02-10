@@ -803,7 +803,7 @@ const App = {
 
         switch(code){
             case "ERROR":
-                App.displayPopup(`Exec undefinedFunction`);
+                App.displayPopup(`Ошибка выполнения`);
                 undefinedFunction();
                 break;
             case "XUZFWQ":
@@ -975,7 +975,7 @@ const App = {
                     case 'settester':
                         App.settings.isTester = commandPayload === '1';
                         App.save();
-                        App.displayPopup(`Set tester: ${App.settings.isTester}`, 1000, () => window.location.reload());
+                        App.displayPopup(`Тестер: ${App.settings.isTester}`, 1000, () => window.location.reload());
                         break;
                     case 'activity:reckoning':
                         Activities.reckoning(true);
@@ -2289,7 +2289,7 @@ const App = {
             `;
             const element = App.displayPrompt(prompt, [
                 {
-                    name: 'set',
+                    name: 'Задать',
                     onclick: (value) => {
                         if(!value) return false;
 
@@ -2311,9 +2311,9 @@ const App = {
                 return username.match(regex) !== null;
             }
 
-            App.displayPrompt(`Set your username`, [
+            App.displayPrompt(`Укажи имя питомца`, [
                 {
-                    name: 'set',
+                    name: 'Задать',
                     onclick: (username) => {
                         username = (username || '').toString().toLowerCase();
                         if(!validate(username)) return App.displayPopup('Недопустимое имя. Используй латинские буквы A–Z и цифры.');
@@ -2722,7 +2722,7 @@ const App = {
                     _ignore: App.isStoragePersistent,
                     name: `
                         <span>
-                            <b class="blink" style="color: red;">Your save data is at risk.</b><br> Your browser may <b>delete</b> it unexpectedly.
+                            <b class="blink" style="color: red;">Данные сохранений под угрозой.</b><br> Браузер может <b>удалить</b> их без предупреждения.
                         </span>
                         <div class="flex flex-dir-col mt-2">
                             <button id="emergency-backup" class="generic-btn stylized primary solid"> ${App.getIcon('download')} Резервная копия </button>
@@ -2733,7 +2733,7 @@ const App = {
                         e.querySelector('#emergency-backup').onclick = (evt) => {
                             App.exportSaveCode();
                             App.isStoragePersistent = true;
-                            evt.target.innerHTML = `${App.getIcon('check')} Exported!`
+                            evt.target.innerHTML = `${App.getIcon('check')} Экспортировано!`
                         }
                     }
                 },
@@ -2771,7 +2771,7 @@ const App = {
                         ${App.getIcon('floppy-disk')} 
                         <span class="flex flex-dir-col pointer-events-none">
                             <span>Сохранить</span>
-                            <small style="font-size: x-small">auto-saves every ${App.constants.AUTO_SAVE_INTERVAL_SECS} secs</small> 
+                            <small style="font-size: x-small">автосохранение каждые ${App.constants.AUTO_SAVE_INTERVAL_SECS} сек</small> 
                         </span>
                         `,
                     onclick: (me) => {
@@ -2783,7 +2783,7 @@ const App = {
                 },
                 {
                     _ignore: !App.deferredInstallPrompt,
-                    name: 'install app',
+                    name: 'Установить приложение',
                     onclick: () => {
                         App.installAsPWA();
                         return true;
@@ -2791,8 +2791,8 @@ const App = {
                 },
                 {
                     _ignore: true || !window?.Notification || !App.isTester(), // unused
-                    _mount: (e) => e.innerHTML = `notifications: <i>${App.settings.notifications ? 'on' : 'off'}</i>`,
-                    name: `notifications`,
+                    _mount: (e) => e.innerHTML = `Уведомления: <i>${App.settings.notifications ? 'вкл' : 'выкл'}</i>`,
+                    name: `Уведомления`,
                     onclick: (btn) => {
                         if(App.settings.notifications) {
                             App.settings.notifications = false;
@@ -2810,11 +2810,11 @@ const App = {
                     },
                 },
                 {
-                    name: `save management`,
+                    name: `Управление сохранениями`,
                     onclick: () => {
                         return App.displayList([
                             {
-                                name: `<i class="fa-solid fa-download icon"></i> <label class="custom-file-upload"><input id="save-file" type="file"></input>Import</label>`,
+                                name: `<i class="fa-solid fa-download icon"></i> <label class="custom-file-upload"><input id="save-file" type="file"></input>Импорт</label>`,
                                 _mount: (element) => {
                                     const input = element.querySelector('#save-file');
                                     App.handleFileLoad(input, 'readAsText', (data) => {
@@ -2828,22 +2828,22 @@ const App = {
                                 }
                             },
                             {
-                                name: `<i class="fa-solid fa-upload icon"></i> Export`,
+                                name: `<i class="fa-solid fa-upload icon"></i> Экспорт`,
                                 onclick: () => App.exportSaveCode()
                             },
                             {
-                                name: `<i class="fa-solid fa-copy icon"></i> copy`,
+                                name: `<i class="fa-solid fa-copy icon"></i> Копировать`,
                                 onclick: async () => {
-                                    const loadingPopup = App.displayPopup('loading...');
+                                    const loadingPopup = App.displayPopup('Загрузка...');
                                     const charCode = await App.getSaveCode();
                                     loadingPopup.close();
                                     App.displayConfirm(`Здесь можно скопировать код сохранения и продолжить игру на другом устройстве`, [
                                         {
-                                            name: 'ok',
+                                            name: 'Ок',
                                             onclick: () => {
                                                 App.displayConfirm(`После копирования открой Tamaweb на другом устройстве и вставь код в <b>Настройки → Ввести код</b>`, [
                                                     {
-                                                        name: 'ok',
+                                                        name: 'Ок',
                                                         onclick: () => {
                                                             try {
                                                                 if(App.isOnItch) throw 'itch_clipboard';
@@ -2851,9 +2851,9 @@ const App = {
                                                                 console.log('save code copied', charCode);
                                                                 App.displayPopup('Код сохранения скопирован!', 1000);
                                                             } catch(e) {
-                                                                const prompt = App.displayPrompt(`Copy your save code from the box below:<br><small><i class="fa-solid fa-info-circle"></i> starts with <b>save:</b> and ends with <b>:endsave</b></small>`, [
+                                                                const prompt = App.displayPrompt(`Скопируй код сохранения из поля ниже:<br><small><i class="fa-solid fa-info-circle"></i> начинается с <b>save:</b> и заканчивается на <b>:endsave</b></small>`, [
                                                                     {
-                                                                        name: 'Ok, I copied',
+                                                                        name: 'Скопировал',
                                                                         class: 'back-btn',
                                                                         onclick: () => {}
                                                                     }
@@ -2877,13 +2877,13 @@ const App = {
                 {
                     // _ignore: !App.isTester(),
                     _ignore: App.isOnItch,
-                    name: `mods`,
+                    name: `Моды`,
                     onclick: () => {
                         const display = App.displayList([
                             {
                                 name: `
                                     <span>
-                                        Please backup your save before installing mods.
+                                        Сделай резервную копию сохранения перед установкой модов.
                                     </span>
                                     <div class="flex flex-dir-col mt-2">
                                         <button id="emergency-backup" class="generic-btn stylized primary solid"> ${App.getIcon('download')} Резервная копия </button>
@@ -2893,18 +2893,18 @@ const App = {
                                 _mount: (e) => {
                                     e.querySelector('#emergency-backup').onclick = (evt) => {
                                         App.exportSaveCode();
-                                        evt.target.innerHTML = `${App.getIcon('check')} Exported!`
+                                        evt.target.innerHTML = `${App.getIcon('check')} Экспортировано!`
                                     }
                                 }
                             },
                             {
-                                name: '<label class="custom-file-upload"><input id="mod-file" type="file"></input>+ Add mod</label>',
+                                name: '<label class="custom-file-upload"><input id="mod-file" type="file"></input>+ Добавить мод</label>',
                                 onclick: (btn) => {
                                     return true;
                                 }
                             },
                             {
-                                name: `active mods (${App.mods.length})`,
+                                name: `Активные моды (${App.mods.length})`,
                                 onclick: () => {
                                     // App.displayPopup(JSON.stringify(App.mods, null, 2), 5000);
                                     if(!App.mods.length) return App.displayPopup('Моды не установлены');
@@ -2917,7 +2917,7 @@ const App = {
                                                     onclick: () => {
                                                         const modInfoScreen = App.displayList([
                                                             {
-                                                                name: `${modInfo.name} <br> <small style="font-size: small">by ${modInfo.author}</small>`,
+                                                                name: `${modInfo.name} <br> <small style="font-size: small">автор: ${modInfo.author}</small>`,
                                                                 type: 'text', solid: true, bold: true,
                                                             },
                                                             {
@@ -2926,7 +2926,7 @@ const App = {
                                                                 type: 'text',
                                                             },
                                                             {
-                                                                name: 'uninstall',
+                                                                name: 'Удалить',
                                                                 onclick: () => {
                                                                     App.displayConfirm(`Удалить мод <b>${modInfo.name}</b>?`, [
                                                                         {
@@ -2959,7 +2959,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'installing / uninstalling mods will refresh the game.',
+                                name: 'Установка и удаление модов перезагружает игру.',
                                 type: 'info'
                             },
                         ])
@@ -2982,14 +2982,14 @@ const App = {
                                 } else {
                                     App.mods.push(json);
                                     App.sendAnalytics('mod_install', json.name);
-                                    App.displayPopup(`<b>${json.name}</b> installed! <br><br> refreshing...`, 2000, () => {
+                                    App.displayPopup(`<b>${json.name}</b> установлен! <br><br> Обновление...`, 2000, () => {
                                         location.reload();
                                     })
                                 }
                                 App.save();
                             } catch(e) {
                                 console.log(e);
-                                App.displayPopup(`Something went wrong, Invalid package: ${e}`);
+                                App.displayPopup(`Ошибка: неверный пакет мода: ${e}`);
                             }
                         })
                         
@@ -2999,7 +2999,7 @@ const App = {
                 },
                 { type: 'separator', _ignore: ignoreFirstDivider },
                 {
-                    name: `gameplay settings`,
+                    name: `Настройки геймплея`,
                     onclick: () => {
                         const getStateIcon = (state) => {
                             const className = state ? 'option on' : 'option off';
@@ -3008,7 +3008,7 @@ const App = {
 
                         return App.displayList([
                             {
-                                name: `Sleeping Hours`,
+                                name: `Часы сна`,
                                 onclick: (e) => {
                                     const list = UI.genericListContainer();
                                     const content = UI.empty();
@@ -3036,14 +3036,14 @@ const App = {
                                             endTime = App.constants.SLEEP_END + App.settings.sleepingHoursOffset;
                                         const rangeStyle = `display: flex;justify-content: space-between;`
                                         info.innerHTML = `
-                                            sleeping
+                                            сон
                                             <br>
                                             <b> 
                                                 <div style="${rangeStyle}">
-                                                    from <div>${App.clampWithin24HourFormat(startTime)}:00</div>
+                                                    с <div>${App.clampWithin24HourFormat(startTime)}:00</div>
                                                 </div>
                                                 <div style="${rangeStyle}">
-                                                    to <div>${App.clampWithin24HourFormat(endTime)}:00</div>
+                                                    до <div>${App.clampWithin24HourFormat(endTime)}:00</div>
                                                 </div>
                                             </b>
                                         `
@@ -3066,15 +3066,15 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.automaticAging)} Auto aging: <i>${App.settings.automaticAging ? 'On' : 'Off'}</i>`,
+                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.automaticAging)} Автовозраст: <i>${App.settings.automaticAging ? 'Вкл' : 'Выкл'}</i>`,
                                 onclick: (e) => {
                                     if(!App.settings.automaticAging){
-                                        App.displayConfirm(`Are you sure? This will make your pets automatically age up after a certain amount of time`, [
+                                        App.displayConfirm(`Включить? Питомцы будут автоматически взрослеть через определённое время.`, [
                                             {
                                                 name: 'Да',
                                                 onclick: () => {
                                                     App.settings.automaticAging = true;
-                                                    App.displayPopup(`Automatic aging turned on`);
+                                                    App.displayPopup(`Автовозраст включён`);
                                                     e._mount();
                                                     App.save();
                                                 }
@@ -3087,7 +3087,7 @@ const App = {
                                         ])
                                     } else {
                                         App.settings.automaticAging = false;
-                                        App.displayPopup(`Automatic aging turned off`);
+                                        App.displayPopup(`Автовозраст выключен`);
                                         App.save();
                                     }
                                     e._mount();
@@ -3096,7 +3096,7 @@ const App = {
                             },
                             {
                                 _ignore: true,
-                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.season)} Season: <i>${App.settings.season}</i>`,
+                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.season)} Сезон: <i>${App.settings.season}</i>`,
                                 onclick: (e) => {
                                     const possibleOptions = [
                                         'auto',
@@ -3115,7 +3115,7 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.showWantName)} show want name: <i>${App.settings.showWantName ? 'On' : 'Off'}</i>`,
+                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.showWantName)} Показывать желание: <i>${App.settings.showWantName ? 'Вкл' : 'Выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.showWantName = !App.settings.showWantName;
                                     App.applySettings();
@@ -3124,7 +3124,7 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.genderedPets)} gendered pets: <i>${App.settings.genderedPets ? 'On' : 'Off'}</i>`,
+                                _mount: (e) => e.innerHTML = `${getStateIcon(App.settings.genderedPets)} Питомцы по полу: <i>${App.settings.genderedPets ? 'Вкл' : 'Выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.genderedPets = !App.settings.genderedPets;
                                     item._mount(); 
@@ -3136,7 +3136,7 @@ const App = {
                                 ${getStateIcon(App.settings.skillsAffectingEvolution)} 
                                 <div class="overflow-hidden flex">
                                     <div class="marquee">
-                                        skills affecting evolution: <i>${App.settings.skillsAffectingEvolution ? 'On' : 'Off'}</i>
+                                        Навыки влияют на эволюцию: <i>${App.settings.skillsAffectingEvolution ? 'Вкл' : 'Выкл'}</i>
                                     </div>
                                 </div>
                                 `,
@@ -3150,19 +3150,19 @@ const App = {
                     }
                 },
                 {
-                    name: `system settings`,
+                    name: `Системные настройки`,
                     onclick: () => {
                         App.displayList([
                             {
-                                name: `sound fx: <i>${App.settings.playSound ? 'on' : 'off'}</i>`,
+                                name: `Звуки: <i>${App.settings.playSound ? 'вкл' : 'выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.playSound = !App.settings.playSound;
-                                    item.innerHTML = `sound fx: <i>${App.settings.playSound ? 'on' : 'off'}</i>`;  
+                                    item.innerHTML = `Звуки: <i>${App.settings.playSound ? 'вкл' : 'выкл'}</i>`;  
                                     return true;
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `bg music: <i>${App.settings.playMusic ? 'on' : 'off'}</i>`,
+                                _mount: (e) => e.innerHTML = `Фоновая музыка: <i>${App.settings.playMusic ? 'вкл' : 'выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.playMusic = !App.settings.playMusic;
                                     item._mount();
@@ -3170,15 +3170,15 @@ const App = {
                                 }
                             },
                             {
-                                name: `vibration: <i>${App.settings.vibrate ? 'on' : 'off'}</i>`,
+                                name: `Вибрация: <i>${App.settings.vibrate ? 'вкл' : 'выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.vibrate = !App.settings.vibrate;
-                                    item.innerHTML = `vibration: <i>${App.settings.vibrate ? 'on' : 'off'}</i>`;  
+                                    item.innerHTML = `Вибрация: <i>${App.settings.vibrate ? 'вкл' : 'выкл'}</i>`;  
                                     return true;
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `classic menu: <i>${App.settings.classicMainMenuUI ? 'on' : 'off'}</i>`,
+                                _mount: (e) => e.innerHTML = `Классическое меню: <i>${App.settings.classicMainMenuUI ? 'вкл' : 'выкл'}</i>`,
                                 onclick: (item) => {
                                     App.settings.classicMainMenuUI = !App.settings.classicMainMenuUI;
                                     item._mount();
@@ -3187,7 +3187,7 @@ const App = {
                                 }
                             },
                             {
-                                name: `back color`,
+                                name: `Цвет фона`,
                                 onclick: () => {
                                     App.displayList([
                                         {
@@ -3195,7 +3195,7 @@ const App = {
                                             onclick: () => { return true; },
                                         },
                                         {
-                                            name: 'apply',
+                                            name: 'Применить',
                                             onclick: () => {
                                                 let colorPicker = document.querySelector('#background-color-picker');
                                                 App.settings.backgroundColor = colorPicker.value;
@@ -3204,7 +3204,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'reset',
+                                            name: 'Сбросить',
                                             onclick: () => {
                                                 let colorPicker = document.querySelector('#background-color-picker');
                                                 colorPicker.value = '#FFDEAD';
@@ -3223,7 +3223,7 @@ const App = {
                                         const isUnlocked = entry.unlockKey ? App.getRecord(entry.unlockKey) : true;
                                         return entry.isNew && isUnlocked;
                                     });
-                                    btn.innerHTML = `back pattern ${hasNew ? App.getBadge('new!') : ''}`
+                                    btn.innerHTML = `Узор фона ${hasNew ? App.getBadge('новое!') : ''}`
                                 },
                                 onclick: () => {
                                     App.handlers.open_background_pattern_list();
@@ -3231,7 +3231,7 @@ const App = {
                                 }
                             },
                             {
-                                name: '+ view size',
+                                name: '+ размер экрана',
                                 onclick: () => {
                                     App.settings.screenSize += 0.1;
                                     App.applySettings();
@@ -3239,7 +3239,7 @@ const App = {
                                 }
                             },
                             {
-                                name: '- view size',
+                                name: '- размер экрана',
                                 onclick: () => {
                                     App.settings.screenSize -= 0.1;
                                     App.applySettings();
@@ -3247,7 +3247,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'reset view size',
+                                name: 'Сбросить размер экрана',
                                 onclick: () => {
                                     App.settings.screenSize = 1;
                                     App.applySettings();
@@ -3259,12 +3259,12 @@ const App = {
                     }
                 },
                 {
-                    name: `Change Theme`,
+                    name: `Сменить тему`,
                     onclick: () => {
                         const newThemes = [];
                         return App.displayList(
                             [...App.definitions.themes].sort((a, b) => newThemes.includes(b) - newThemes.includes(a)).map(themeName => ({
-                                name: `${themeName.replace('color ', '')} ${newThemes.includes(themeName) ? App.getBadge('new!') : ''}`,
+                                name: `${themeName.replace('color ', '')} ${newThemes.includes(themeName) ? App.getBadge('новое!') : ''}`,
                                 // class: `theme-${themeName}`,
                                 onclick: () => {
                                     App.settings.theme = themeName;
@@ -3283,7 +3283,7 @@ const App = {
 
                         App.displayList([
                             {
-                                _mount: (e) => e.innerHTML = `display shell: <i>${App.settings.displayShell ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
+                                _mount: (e) => e.innerHTML = `Показывать корпус: <i>${App.settings.displayShell ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
                                 onclick: (item) => {
                                     App.settings.displayShell = !App.settings.displayShell;
                                     App.applySettings();
@@ -3292,7 +3292,7 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML =  `shell button: <i>${App.settings.displayShellButtons ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
+                                _mount: (e) => e.innerHTML =  `Кнопки корпуса: <i>${App.settings.displayShellButtons ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
                                 onclick: (item) => {
                                     App.settings.displayShellButtons = !App.settings.displayShellButtons;
                                     App.applySettings();
@@ -3301,7 +3301,7 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML =  `shell logo: <i>${App.settings.displayShellLogo ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
+                                _mount: (e) => e.innerHTML =  `Логотип на корпусе: <i>${App.settings.displayShellLogo ? App.getIcon('eye') : App.getIcon('eye-slash')}</i>`,
                                 onclick: (item) => {
                                     App.settings.displayShellLogo = !App.settings.displayShellLogo;
                                     App.applySettings();
@@ -3310,7 +3310,7 @@ const App = {
                                 }
                             },
                             {
-                                name: `+ shell size`,
+                                name: `+ размер корпуса`,
                                 onclick: () => {
                                     App.settings.shellAdditionalSize += 0.1;
                                     App.applySettings();
@@ -3318,7 +3318,7 @@ const App = {
                                 }
                             },
                             {
-                                name: `- shell size`,
+                                name: `- размер корпуса`,
                                 onclick: () => {
                                     App.settings.shellAdditionalSize -= 0.1;
                                     App.applySettings();
@@ -3326,7 +3326,7 @@ const App = {
                                 }
                             },
                             {
-                                name: `reset shell size`,
+                                name: `Сбросить размер корпуса`,
                                 onclick: () => {
                                     App.settings.shellAdditionalSize = 0;
                                     App.applySettings();
@@ -3334,7 +3334,7 @@ const App = {
                                 }
                             },
                             {
-                                _mount: (e) => e.innerHTML = `shell shape: <i>${App.settings.shellShape}</i>`,
+                                _mount: (e) => e.innerHTML = `Форма корпуса: <i>${App.settings.shellShape}</i>`,
                                 onclick: (item) => {
                                     App.settings.shellShape++;
                                     if(App.settings.shellShape > App.constants.MAX_SHELL_SHAPES){
@@ -3351,7 +3351,7 @@ const App = {
                                         const isUnlocked = entry.unlockKey ? App.getRecord(entry.unlockKey) : true;
                                         return entry.isNew && isUnlocked;
                                     });
-                                    e.innerHTML = `change shell ${hasNew ? App.getBadge('new!') : ''}`
+                                    e.innerHTML = `Сменить корпус ${hasNew ? App.getBadge('новое!') : ''}`
                                 },
                                 onclick: () => {
                                     App.handlers.open_shell_background_list();
@@ -3359,7 +3359,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'custom shell',
+                                name: 'Свой корпус',
                                 onclick: () => {
                                     let display = App.displayList([
                                         {
@@ -3370,25 +3370,25 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'enter url',
+                                            name: 'Ввести URL',
                                             onclick: () => {
-                                                App.displayPrompt(`Enter URL:`, [
+                                                App.displayPrompt(`Введи URL:`, [
                                                     {
-                                                        name: 'set',
+                                                        name: 'Задать',
                                                         onclick: (url) => {
                                                             let res = App.setShellBackground(url);
-                                                            if(res) App.displayPopup('Shell background set');
+                                                            if(res) App.displayPopup('Фон корпуса установлен');
                                                             return true;
                                                         }
                                                     },
-                                                    {name: 'cancel', class: 'back-btn', onclick: () => {}},
+                                                    {name: 'Отмена', class: 'back-btn', onclick: () => {}},
                                                 ]);
                                                 return true;
                                             }
                                         },
                                         {
                                             _ignore: !App.isTester,
-                                            name: 'from clipboard',
+                                            name: 'Из буфера обмена',
                                             onclick: async () => {
                                                 try {
                                                     const clipboardItems = await navigator.clipboard.read();
@@ -3412,7 +3412,7 @@ const App = {
                                     App.handleFileLoad(display.querySelector('#shell-image-file'), 'readAsDataURL', async (data) => {
                                         const downscaledData = await downscaleImage(data, 768, 768, 0.5);
                                         let res = App.setShellBackground(downscaledData);
-                                        if(res) App.displayPopup('Shell background set');
+                                        if(res) App.displayPopup('Фон корпуса установлен');
                                         return true;
                                     })
 
@@ -3425,33 +3425,33 @@ const App = {
                     },
                 },
                 {
-                    name: 'input code',
+                    name: 'Ввести код',
                     onclick: () => {
-                        App.displayPrompt(`Enter code:`, [
+                        App.displayPrompt(`Введи код:`, [
                             {
-                                name: 'set',
+                                name: 'Ввести',
                                 onclick: (value) => {
                                     App.handleInputCode(value);
                                     return false;
                                 }
                             },
-                            {name: 'cancel', class: 'back-btn', onclick: () => {}},
+                            {name: 'Отмена', class: 'back-btn', onclick: () => {}},
                         ]);
                         return true;
                     }
                 },
                 { type: 'separator' },
                 {
-                    name: 'reset pet data',
+                    name: 'Сбросить данные питомца',
                     onclick: () => {
-                        App.displayConfirm('Are you sure you want to delete your saved pet?', [
+                        App.displayConfirm('Удалить сохранённого питомца?', [
                             {
-                                name: 'yes (delete)',
+                                name: 'Да (удалить)',
                                 onclick: async () => {
                                     App.save();
                                     App.save = () => {};
 
-                                    App.displayPopup('resetting...', App.INF);
+                                    App.displayPopup('Сброс...', App.INF);
 
                                     window.localStorage?.removeItem('pet');
                                     window.localStorage?.removeItem('last_time');
@@ -3474,18 +3474,18 @@ const App = {
                     }
                 },
                 {
-                    name: 'factory reset',
+                    name: 'Полный сброс',
                     onclick: () => {
-                        App.displayConfirm('Are you sure you want to completely delete your data? this will reset your pets, achievements, online id and everything else!', [
+                        App.displayConfirm('Полностью удалить все данные? Будут сброшены питомцы, достижения, онлайн-ID и всё остальное!', [
                             {
                                 name: 'Да',
                                 onclick: () => {
-                                    App.displayConfirm('Are you sure? There is no way to revert this.', [
+                                    App.displayConfirm('Точно? Это нельзя отменить.', [
                                         {
-                                            name: 'yes (delete)',
+                                            name: 'Да (удалить)',
                                             onclick: async () => {
                                                 App.save = () => {};
-                                                App.displayPopup('resetting...', App.INF);
+                                                App.displayPopup('Сброс...', App.INF);
 
                                                 window.localStorage?.clear()
                                                 await window.idbKeyval.clear();
@@ -3517,23 +3517,23 @@ const App = {
                 },
                 { type: 'separator' },
                 {
-                    name: 'credits',
+                    name: 'Благодарности',
                     onclick: () => App.handlers.open_credits(),
                 },
                 {
-                    name: `send feedback`,
+                    name: `Отправить отзыв`,
                     onclick: () => {
-                        return App.displayPrompt(`what would you like to to be added in the next update?`, [
+                        return App.displayPrompt(`Что бы ты хотел увидеть в следующем обновлении?`, [
                             {
-                                name: 'send',
+                                name: 'Отправить',
                                 onclick: (data) => {
                                     if(!data) return true;
-                                    App.displayPopup(`<b>Suggestion sent!</b><br> thanks for participating!`, 4000);
+                                    App.displayPopup(`<b>Отзыв отправлен!</b><br> Спасибо за участие!`, 4000);
                                     App.sendFeedback(data);
                                 },
                             },
                             {
-                                name: 'cancel',
+                                name: 'Отмена',
                                 class: 'back-btn',
                                 onclick: () => {},
                             }
@@ -3541,13 +3541,13 @@ const App = {
                     }
                 },
                 {
-                    name: `<b>rate us!</b>`,
+                    name: `<b>Оцени нас!</b>`,
                     onclick: () => App.handlers.show_rating_dialog()
                 },
                 {
                     // _ignore: true,
                     link: App.routes.BLOG,
-                    name: `<b>see changelog</b>`,
+                    name: `<b>История изменений</b>`,
                     onclick: () => {
                         App.sendAnalytics('go_to_blog');
                         return true;
@@ -3556,7 +3556,7 @@ const App = {
                 {
                     // _ignore: true,
                     link: App.routes.DISCORD,
-                    name: '<b>join <span style="color:#7289da;text-shadow:none;">discord</span></b>',
+                    name: '<b>Вступить в <span style="color:#7289da;text-shadow:none;">Discord</span></b>',
                     onclick: () => true,
                 },
                 { type: 'separator' },
@@ -7855,7 +7855,7 @@ const App = {
         return charCode;
     },
     exportSaveCode: async function(providedCode){
-        const loadingPopup = App.displayPopup('loading...');
+        const loadingPopup = App.displayPopup('Загрузка...');
         const code = providedCode ?? await App.getSaveCode();
         loadingPopup.close();
         downloadTextFile(`${App.petDefinition.name}_${generateTimestamp()}.tws`, code);
