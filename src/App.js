@@ -1011,45 +1011,11 @@ const App = {
         // })) return;
 
         if(addEvent(`update_24_notice`, () => {
-            App.displayList([
-                {
-                    name: `New update is available!<b> <div><small>${VERSION}</small></div> ${App.getBadge('new!')}`,
-                    type: 'text',
-                    solid: true,
-                    bold: true,
-                },
-                /* {
-                    name: `
-                        <img class="update-banner" src="resources/img/ui/update_banner.png"></img>
-                        <br>
-                        <div>
-                        Check out the <b>Seasons</b> feature, <b>Santa Encounter</b>, <b>New Flags Minigame</b>, <b>Rebalances</b> and more!
-                        </div>
-                    `,
-                    type: 'text',
-                }, */
-                {
-                    name: `
-                        <div>
-                        Check out the new <b>Hang out</b> option, <b>picking up</b> your pet, <b>Brushing</b> your pet's teeth and more!
-                        </div>
-                    `,
-                    type: 'text',
-                },
-                {
-                    link: App.routes.BLOG,
-                    name: 'see whats new',
-                    class: 'solid primary',
-                    onclick: () => {
-                        App.sendAnalytics('go_to_blog_whats_new');
-                    }
-                },
-            ])
+            // Экран «New update / Hang out» отключён по запросу
         }, false)) return;
 
         if(addEvent('itch_rating_dialog', () => {
-            App.handlers.show_rating_dialog();
-            App.sendAnalytics('rating_auto_shown');
+            // Диалог оценки отключён (без рекламы/призывов)
         })) return;
 
         // if(addEvent(`smallchange_01_notice`, () => {
@@ -2484,7 +2450,7 @@ const App = {
                 {...disciplineEntry},
                 {
                     _mount: (me) => {
-                        me.innerHTML = `Missions ${getUnclaimedRewardsBadge()}`
+                        me.innerHTML = `Миссии ${getUnclaimedRewardsBadge()}`
                     },
                     name: '',
                     onclick: () => {
@@ -2493,7 +2459,7 @@ const App = {
                     }
                 },
                 {
-                    name: `sleep ${App.isSleepHour() ? App.getBadge('<div style="margin-left: auto; padding: 2px"> <i class="fa-solid fa-moon"></i> <small>время спать!</small> </div>', 'night') : ''}`,
+                    name: `Сон ${App.isSleepHour() ? App.getBadge('<div style="margin-left: auto; padding: 2px"> <i class="fa-solid fa-moon"></i> <small>время спать!</small> </div>', 'night') : ''}`,
                     onclick: () => {
                         App.handlers.sleep();
                     }
@@ -2511,7 +2477,7 @@ const App = {
                     }
                 },
                 {
-                    name: `pet`,
+                    name: `Погладить`,
                     onclick: () => {
                         App.displayPopup(`Жми на экран, чтобы гладить <b>${App.petDefinition.name}</b><br><br>Не жми несколько секунд, чтобы остановиться`, 2800, () => {
                             Activities.pet();
@@ -2547,32 +2513,32 @@ const App = {
                 },
                 {
                     _disable: !App.pet.stats.current_want.type,
-                    name: `current want`,
+                    name: `Текущее желание`,
                     onclick: () => {
                         App.closeAllDisplays();
                         App.pet.showCurrentWant(App.settings.showWantName);
                     }
                 },
-            ], null, 'Care')
+            ], null, 'Уход')
         },
         open_stuff_menu: function(){
             App.displayList([
                 {
-                    name: `items`,
+                    name: `Предметы`,
                     onclick: () => {
                         App.handlers.open_item_list();
                         return true;
                     }
                 },
                 {
-                    name: `accessories`,
+                    name: `Аксессуары`,
                     onclick: () => {
                         App.handlers.open_accessory_list();
                         return true;
                     }
                 },
                 {
-                    name: `furniture`,
+                    name: `Мебель`,
                     onclick: () => {
                         if(!App.isRoomFurnishable()){
                             return App.displayConfirm(`В комнате уже есть мебель.<br><br>Убрать стандартный набор и настроить по своему?`, [
@@ -2599,41 +2565,41 @@ const App = {
                     }
                 },
                 {
-                    name: `craft`,
+                    name: `Крафт`,
                     onclick: () => {
                         App.handlers.open_craftables_list();
                         return true;
                     }
                 }
-            ], null, 'Stuff')
+            ], null, 'Вещи')
         },
         open_bathroom_menu: function(){
             App.displayList([
                 {
-                    name: 'bathe',
+                    name: 'Искупать',
                     onclick: () => { 
                         Activities.bathe();
                     }
                 },
                 {
-                    name: 'use toilet',
+                    name: 'На горшок',
                     onclick: () => { 
                         Activities.poop();
                     }
                 },
                 {
-                    name: `brush teeth ${App.getBadge()}`,
+                    name: `Чистить зубы ${App.getBadge()}`,
                     onclick: () => {
                         Activities.brushTeeth();
                     }
                 },
                 {
-                    name: 'clean room',
+                    name: 'Убрать в комнате',
                     onclick: () => {
                         App.handlers.clean();
                     }
                 },
-            ], null, 'Cleaning')
+            ], null, 'Гигиена')
         },
         open_credits: function(){
             return App.displayList([
@@ -3541,10 +3507,6 @@ const App = {
                     }
                 },
                 {
-                    name: `<b>Оцени нас!</b>`,
-                    onclick: () => App.handlers.show_rating_dialog()
-                },
-                {
                     // _ignore: true,
                     link: App.routes.BLOG,
                     name: `<b>История изменений</b>`,
@@ -4079,21 +4041,21 @@ const App = {
         open_feeding_menu: function(){
             App.displayList([
                 {
-                    name: 'food',
+                    name: 'Еда',
                     onclick: () => {
                         App.handlers.open_food_list({filterType: 'food'});
                         return true;
                     }
                 },
                 {
-                    name: 'snacks',
+                    name: 'Лакомства',
                     onclick: () => {
                         App.handlers.open_food_list({filterType: 'treat'});
                         return true;
                     }
                 },
                 {
-                    name: 'meds',
+                    name: 'Лекарства',
                     onclick: () => {
                         App.handlers.open_food_list({filterType: 'med'});
                         return true;
@@ -4102,7 +4064,7 @@ const App = {
                 {
                     // _ignore: !App.isTester(),
                     _disable: App.petDefinition.lifeStage <= PetDefinition.LIFE_STAGE.baby,
-                    name: `cook`,
+                    name: `Готовка`,
                     onclick: () => {
                         return App.displayList([
                             {
@@ -4211,20 +4173,20 @@ const App = {
                         
                     }
                 }
-            ], null, 'Feeding')
+            ], null, 'Кормление')
         },
         open_stats_menu: function(){
             const hasNewlyUnlockedAchievements = App.handlers.open_achievements_list(true);
             App.displayList([
                 {
-                    name: 'stats',
+                    name: 'Статистика',
                     onclick: () => {
                         App.handlers.open_stats();
                         return true;
                     }
                 },
                 {
-                    name: 'profile',
+                    name: 'Профиль',
                     onclick: () => {
                         if(!App.userName){
                             App.handlers.show_set_username_dialog();
@@ -4235,37 +4197,37 @@ const App = {
                     }
                 },
                 {
-                    name: `family tree`,
+                    name: `Семейное древо`,
                     onclick: () => {
                         App.handlers.open_family_tree();
                         return true;
                     }
                 },
                 {
-                    name: `collection`,
+                    name: `Коллекция`,
                     onclick: () => {
                         App.handlers.open_character_collection();
                         return true;
                     }
                 },
                 {
-                    name: `achievements ${hasNewlyUnlockedAchievements ? App.getBadge('Rewards!') : ''}`,
+                    name: `Достижения ${hasNewlyUnlockedAchievements ? App.getBadge('Награды!') : ''}`,
                     onclick: () => {
                         App.handlers.open_achievements_list();
                         return true;
                     }
                 },
                 {
-                    name: App.settings.genderedPets ? 'set name/gender' : 'set nickname',
+                    name: App.settings.genderedPets ? 'Имя и пол' : 'Прозвище',
                     onclick: () => {
-                        const prompt = App.settings.genderedPets ? 'Enter Name and Gender:' : 'Enter a new name for your pet:';
+                        const prompt = App.settings.genderedPets ? 'Введи имя и выбери пол:' : 'Введи новое имя питомца:';
                         App.handlers.show_set_pet_name_dialog(prompt);
                         return true;
                     }
                 },
                 {
                     _disable: !App.petDefinition.deceasedPredecessors?.length,
-                    name: `past generations`,
+                    name: `Прошлые поколения`,
                     onclick: () => {
                         const generations = 
                             App.petDefinition.deceasedPredecessors
@@ -4281,7 +4243,7 @@ const App = {
                                 })
                         App.displayList([
                             {
-                                name: 'Select the generation',
+                                name: 'Выбери поколение',
                                 type: 'text'
                             },
                             ...generations
@@ -4289,7 +4251,7 @@ const App = {
                         return true;
                     }
                 },
-            ], null, 'Information')
+            ], null, 'Информация')
         },
         open_active_buffs: (type) => {
             if(typeof type !== 'string') type = null;
@@ -5966,11 +5928,11 @@ const App = {
                     }
                 },
                 {
-                    name: `friend codes`,
+                    name: `Коды друзей`,
                     onclick: () => {
                         App.displayList([
                             {
-                                name: 'get code',
+                                name: 'Получить код',
                                 onclick: async () => {
                                     const loading = App.displayPopup('Loading...', App.INF);
                                     const pet = await window.idbKeyval.get('pet');
@@ -5995,11 +5957,11 @@ const App = {
                                 }
                             },
                             {
-                                name: 'input code',
+                                name: 'Ввести код',
                                 onclick: () => {
-                                    App.displayPrompt(`enter your friend code:`, [
+                                    App.displayPrompt(`Введи свой код друга:`, [
                                         {
-                                            name: 'enter',
+                                            name: 'Ввести',
                                             onclick: (rawCode) => {
                                                 if(rawCode.indexOf('friend:') == -1) return App.displayPopup(`Invalid friend code!`);
 
@@ -6039,7 +6001,7 @@ const App = {
                                         },
                                         
                                         {
-                                            name: 'cancel',
+                                            name: 'Отмена',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         },
@@ -6054,7 +6016,7 @@ const App = {
                         return true;
                     }
                 }
-            ], null, 'Phone')
+            ], null, 'Телефон')
         },
         open_social_media: function(){
             if(!App.temp.seenSocialMediaPosts){
@@ -7245,7 +7207,7 @@ const App = {
         document.body.appendChild(modal);
     },
     getBadge: function(text, color, expirationDate){
-        if(!text && text !== '') text = 'new!';
+        if(!text && text !== '') text = 'новое!';
         if(!color) color = 'red';
 
         if(expirationDate){

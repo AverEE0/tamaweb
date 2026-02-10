@@ -99,13 +99,6 @@ App.definitions = (() => {
                 }
             },
             {
-                id: 'phone',
-                name: '<i class="fa-solid fa-mobile-alt"></i>',
-                onclick: () => {
-                    App.handlers.open_phone();
-                }
-            },
-            {
                 id: 'settings',
                 name: `<i class="fa-solid fa-gear"></i>`,
                 onclick: () => {
