@@ -384,22 +384,22 @@ class Pet extends Object2d {
             }
 
             if(App.pet.stats.is_revived_once){
-                App.displayConfirm(`Do you want to receive a new egg?`, [
+                App.displayConfirm(`Взять новое яйцо?`, [
                     {
-                        name: 'yes',
+                        name: 'Да',
                         onclick: handleReceiveEgg
                     },
                     {
-                        name: 'no',
+                        name: 'Нет',
                         class: 'back-btn',
                         onclick: () => { }
                     },
                 ], false);
             } else {
                 const revivalPrice = clamp(Math.floor(App.pet.stats.gold / 2), App.constants.MIN_REVIVE_GOLDS, App.constants.MAX_REVIVE_GOLDS);
-                App.displayConfirm(`<b>${App.petDefinition.name}</b> is dead but you can choose to revive them only <b>once</b>, do you want to revive them?`, [
+                App.displayConfirm(`<b>${App.petDefinition.name}</b> умер(ла). Можно воскресить только <b>один раз</b>. Воскресить?`, [
                     {
-                        name: `revive ($${revivalPrice})`,
+                        name: `Воскресить ($${revivalPrice})`,
                         onclick: () => {
                             if(App.pay(revivalPrice)){
                                 Activities.revive()
@@ -409,11 +409,11 @@ class Pet extends Object2d {
                         }
                     },
                     {
-                        name: 'get a new egg',
+                        name: 'Новое яйцо',
                         onclick: handleReceiveEgg
                     },
                     {
-                        name: 'back',
+                        name: 'Назад',
                         class: 'back-btn',
                         onclick: () => {}
                     }
@@ -445,7 +445,7 @@ class Pet extends Object2d {
         this.x = -600;
 
         App.toggleGameplayControls(false, () => {
-            App.displayPopup('Wait for your egg to hatch');
+            App.displayPopup('Ждите, пока вылупится яйцо');
         })
 
         const getEggSpritesheet = () => {

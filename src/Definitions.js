@@ -117,66 +117,66 @@ App.definitions = (() => {
         /* OUTDOOR ACTIVITIES */
         outside_activities: [
             {
-                name: "Home",
+                name: "Дом",
                 image: 'resources/img/misc/activity_building_home.png',
                 onEnter: () => App.handlers.go_to_home(),
                 isHome: true,
             },
             {
-                name: "Mall",
+                name: "ТЦ",
                 image: 'resources/img/misc/activity_building_mall.png',
                 onEnter: () => Activities.goToMall(),
             },
             {
-                name: "Market",
+                name: "Рынок",
                 image: 'resources/img/misc/activity_building_market.png',
                 onEnter: () => Activities.goToMarket(),
             },
             {
-                name: `Game Center`,
+                name: "Игровой центр",
                 image: 'resources/img/misc/activity_building_arcade.png',
                 onEnter: () => Activities.goToArcade(),
             },
             {
                 isDisabled: () => App.petDefinition.lifeStage <= PetDefinition.LIFE_STAGE.child,
-                name: 'Homeworld Getaways',
+                name: 'Курорты',
                 image: 'resources/img/misc/activity_building_homeworld_getaway.png',
                 onEnter: () => App.handlers.open_rabbitholes_list(),
             },
             {
-                name: 'Fortune Teller',
+                name: 'Гадалка',
                 image: 'resources/img/misc/activity_building_fortune_teller.png',
                 onEnter: () => App.handlers.open_fortune_teller(),
             },
             {
-                name: 'Park',
+                name: 'Парк',
                 image: 'resources/img/misc/activity_building_park.png',
                 onEnter: () => App.handlers.go_to_park(),
             },
             {
                 isDisabled: () => !(App.petDefinition.lifeStage >= PetDefinition.LIFE_STAGE.child && App.petDefinition.lifeStage <= PetDefinition.LIFE_STAGE.teen),
-                name: `School`,
+                name: "Школа",
                 image: 'resources/img/misc/activity_building_school.png',
                 onEnter: () => App.handlers.go_to_school(),
             },
             {
-                name: "Hospital",
+                name: "Больница",
                 image: 'resources/img/misc/activity_building_hospital.png',
                 onEnter: () => App.handlers.go_to_clinic(),
             },
             {
-                name: `Restaurant`,
+                name: "Ресторан",
                 image: 'resources/img/misc/activity_building_restaurant.png',
                 onEnter: () => Activities.goToRestaurant(),
             },
             {
                 isDisabled: () => App.petDefinition.lifeStage < PetDefinition.LIFE_STAGE.adult,
-                name: 'Work',
+                name: 'Работа',
                 image: 'resources/img/misc/activity_building_work.png',
                 onEnter: () => App.handlers.open_works_list(),
             },
             {
-                name: `Underworld Entrance`,
+                name: "Подземелье",
                 image: 'resources/img/misc/activity_building_underworld.png',
                 onEnter: () => Activities.goToUnderworldEntrance(),
             },
@@ -2407,98 +2407,98 @@ App.definitions = (() => {
         /* ACHIEVEMENTS */
         achievements: {
             pat_x_times: {
-                name: 'Pat! Pat! Pat!',
-                description: 'Pet your buddy 100 times!',
+                name: 'Тыдысь-тыдысь!',
+                description: 'Погладь питомца 100 раз!',
                 checkProgress: () => App.getRecord('times_patted') >= 100,
                 advance: (amount) => App.addRecord('times_patted', amount),
                 getReward: () => {
                     App.pet.stats.gold += 150;
-                    App.displayPopup(`You've received $150!`);
+                    App.displayPopup(`Получено 150 монет!`);
                 }
             },
             use_toilet_x_times: {
-                name: 'Toilet Master',
-                description: 'Have your pets go to the toilet 5 times',
+                name: 'Мастер туалета',
+                description: 'Своди питомца в туалет 5 раз',
                 checkProgress: () => App.getRecord('times_used_toilet') >= 5,
                 advance: (amount) => App.addRecord('times_used_toilet', amount),
                 getReward: () => {
                     App.pet.stats.gold += 150;
-                    App.displayPopup(`You've received $150!`);
+                    App.displayPopup(`Получено 150 монет!`);
                 }
             },
             marry_x_times: {
-                name: 'Serial Marrier',
-                description: 'Marry off your pets 5 times',
+                name: 'Свадебный магнат',
+                description: 'Сыграй 5 свадеб питомцев',
                 checkProgress: () => App.getRecord('times_married') >= 5,
                 advance: (amount) => App.addRecord('times_married', amount),
                 getReward: () => {
                     App.pet.stats.gold += 1000;
-                    App.displayPopup(`You've received $1000!`);
+                    App.displayPopup(`Получено 1000 монет!`);
                 }
             },
             birthday_x_times: {
-                name: 'Happy Birthday!',
-                description: 'Age up your pet',
+                name: 'С днём рождения!',
+                description: 'Празднуй день рождения питомца',
                 checkProgress: () => App.getRecord('times_had_birthday') >= 1,
                 advance: (amount) => App.addRecord('times_had_birthday', amount),
                 getReward: () => {
                     App.pet.stats.gold += 150;
-                    App.displayPopup(`You've received $150!`);
+                    App.displayPopup(`Получено 150 монет!`);
                 }
             },
             redecor_x_times: {
-                name: 'Interior Designer',
-                description: 'Redecor your room',
+                name: 'Дизайнер интерьера',
+                description: 'Переделай комнату',
                 checkProgress: () => App.getRecord('times_redecorated_background') >= 1,
                 advance: (amount) => App.addRecord('times_redecorated_background', amount),
                 getReward: () => {
                     App.pet.stats.gold += 100;
-                    App.displayPopup(`You've received $100!`);
+                    App.displayPopup(`Получено 100 монет!`);
                 }
             },
             give_gifts_x_times: {
-                name: 'Giftspreader',
-                description: 'Give 5 gifts to your friends',
+                name: 'Щедрый друг',
+                description: 'Подари 5 подарков друзьям',
                 checkProgress: () => App.getRecord('times_gave_gift') >= 5,
                 advance: (amount) => App.addRecord('times_gave_gift', amount),
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             work_x_times: {
-                name: 'Workaholic',
-                description: 'Work for 10 shifts',
+                name: 'Трудяга',
+                description: 'Отработай 10 смен',
                 checkProgress: () => App.getRecord('times_worked') >= 10,
                 advance: (amount) => App.addRecord('times_worked', amount),
                 getReward: () => {
                     App.pet.stats.gold += 350;
-                    App.displayPopup(`You've received $350!`);
+                    App.displayPopup(`Получено 350 монет!`);
                 }
             },
             go_to_vacation_x_times: {
-                name: 'Sightsee-er',
-                description: 'Take a vacation!',
+                name: 'Турист',
+                description: 'Съезди в отпуск!',
                 checkProgress: () => App.getRecord('times_went_on_vacation') >= 1,
                 advance: (amount) => App.addRecord('times_went_on_vacation', amount),
                 getReward: () => {
                     App.pet.stats.gold += 150;
-                    App.displayPopup(`You've received $150!`);
+                    App.displayPopup(`Получено 150 монет!`);
                 }
             },
             not_propose_on_date_x_times: {
-                name: 'Heartbreaker',
-                description: `Go on successful dates but don't propose!`,
+                name: 'Разбиватель сердец',
+                description: 'Сходи на 10 свиданий и не делай предложение!',
                 checkProgress: () => App.getRecord('times_not_proposed') >= 10,
                 advance: (amount) => App.addRecord('times_not_proposed', amount),
                 getReward: () => {
                     App.pet.stats.gold += 300;
-                    App.displayPopup(`You've received $300!`);
+                    App.displayPopup(`Получено 300 монет!`);
                 }
             },
             harvest_cook_x_times: {
-                name: 'Farm-to-table Chef',
-                description: `Successfully cook 10 food items using harvests!`,
+                name: 'Шеф с грядки',
+                description: 'Приготовь 10 блюд из урожая!',
                 checkProgress: () => App.getRecord('harvestable_cooked_x_times') >= 10,
                 advance: (amount) => App.addRecord('harvestable_cooked_x_times', amount),
                 getReward: () => {
@@ -2506,12 +2506,12 @@ App.definitions = (() => {
                         .find( ([_, info]) => info.cookableOnly );
                     App.pet.stats.gold += 200;
                     App.addNumToObject(App.pet.inventory.food, rewardFoodName, 10);
-                    App.displayPopup(`You've received $200 and <br>${App.getFoodCSprite(rewardFoodInfo.sprite)}<br> <b>${rewardFoodName}</b> <small>x5</small>`);
+                    App.displayPopup(`Получено 200 монет и<br>${App.getFoodCSprite(rewardFoodInfo.sprite)}<br><b>${rewardFoodName}</b> <small>x5</small>`);
                 }
             },
             camera_cook_x_times: {
-                name: 'Camera Chef',
-                description: `Successfully cook 10 food items using the camera!`,
+                name: 'Шеф-фотограф',
+                description: 'Приготовь 10 блюд по фото!',
                 checkProgress: () => App.getRecord('camera_cooked_x_times') >= 10,
                 advance: (amount) => App.addRecord('camera_cooked_x_times', amount),
                 getReward: () => {
@@ -2519,12 +2519,12 @@ App.definitions = (() => {
                         .find( ([_, info]) => info.cookableOnly );
                     App.pet.stats.gold += 200;
                     App.addNumToObject(App.pet.inventory.food, rewardFoodName, 5);
-                    App.displayPopup(`You've received $200 and <br>${App.getFoodCSprite(rewardFoodInfo.sprite)}<br> <b>${rewardFoodName}</b> <small>x5</small>`);
+                    App.displayPopup(`Получено 200 монет и<br>${App.getFoodCSprite(rewardFoodInfo.sprite)}<br><b>${rewardFoodName}</b> <small>x5</small>`);
                 }
             },
             reach_max_skill_expression: {
-                name: 'Expressive',
-                description: `Reach max expression skill!`,
+                name: 'Артистичный',
+                description: 'Макс. навык «Выразительность»!',
                 checkProgress: () => {
                     if(App.pet?.stats?.current_expression >= 100){
                         App.addRecord('reach_max_expression', 1, true)
@@ -2534,12 +2534,12 @@ App.definitions = (() => {
                 advance: () => null,
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             reach_max_skill_logic: {
-                name: 'Thinker',
-                description: `Reach max logic skill!`,
+                name: 'Мыслитель',
+                description: 'Макс. навык «Логика»!',
                 checkProgress: () => {
                     if(App.pet?.stats?.current_logic >= 100){
                         App.addRecord('reach_max_logic', 1, true)
@@ -2549,12 +2549,12 @@ App.definitions = (() => {
                 advance: () => null,
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             reach_max_skill_endurance: {
-                name: 'Resilient',
-                description: `Reach max endurance skill!`,
+                name: 'Выносливый',
+                description: 'Макс. навык «Выносливость»!',
                 checkProgress: () => {
                     if(App.pet?.stats?.current_endurance >= 100){
                         App.addRecord('reach_max_endurance', 1, true)
@@ -2564,60 +2564,58 @@ App.definitions = (() => {
                 advance: () => null,
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
-    
-            // minigames
             perfect_minigame_rodrush_win_x_times: {
-                name: 'Rod Rush Pro',
-                description: 'Win with perfect score in Rod Rush game 10 times',
+                name: 'Профи удочки',
+                description: 'Идеальный счёт в «Удочка» 10 раз',
                 checkProgress: () => App.getRecord('times_perfected_rodrush_minigame') >= 10,
                 advance: (amount) => App.addRecord('times_perfected_rodrush_minigame', amount),
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             perfect_minigame_catch_win_x_gold: {
-                name: 'Money Catcher',
-                description: 'Win $125 in single game of Catch!',
+                name: 'Ловец монет',
+                description: 'Выиграй 125 монет в одной игре «Ловля»!',
                 required: 125,
                 checkProgress: () => App.getRecord('won_x_gold_in_catch_minigame') >= 1,
                 advance: () => App.addRecord('won_x_gold_in_catch_minigame', 1),
                 getReward: () => {
                     App.pet.stats.gold += 400;
-                    App.displayPopup(`You've received $400!`);
+                    App.displayPopup(`Получено 400 монет!`);
                 }
             },
             perfect_minigame_mimic_win_x_times: {
-                name: 'Perfect Imitator',
-                description: 'Win with perfect score in Mimic game 10 times!',
+                name: 'Идеальный имитатор',
+                description: 'Идеальный счёт в «Повторялка» 10 раз!',
                 checkProgress: () => App.getRecord('times_perfected_mimic_minigame') >= 10,
                 advance: (amount) => App.addRecord('times_perfected_mimic_minigame', amount),
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             perfect_minigame_cropmatch_win_x_times: {
-                name: 'Memory Maestro',
-                description: 'Win with perfect score in Crop Match game 10 times!',
+                name: 'Мастер памяти',
+                description: 'Идеальный счёт в «Урожай» 10 раз!',
                 checkProgress: () => App.getRecord('times_perfected_cropmatch_minigame') >= 10,
                 advance: (amount) => App.addRecord('times_perfected_cropmatch_minigame', amount),
                 getReward: () => {
                     App.pet.stats.gold += 500;
-                    App.displayPopup(`You've received $500!`);
+                    App.displayPopup(`Получено 500 монет!`);
                 }
             },
             perfect_minigame_petgroom_win_x_times: {
-                name: 'Master of the Fluff',
-                description: 'Win with perfect score in Pet Grooming game 10 times!',
+                name: 'Мастер груминга',
+                description: 'Идеальный счёт в «Уход за питомцем» 10 раз!',
                 checkProgress: () => App.getRecord('times_perfected_petgroom_minigame') >= 10,
                 advance: (amount) => App.addRecord('times_perfected_petgroom_minigame', amount),
                 getReward: () => {
                     App.pet.stats.gold += 200;
-                    App.displayPopup(`You've received $200!`);
+                    App.displayPopup(`Получено 200 монет!`);
                 }
             },
         },
@@ -2871,7 +2869,7 @@ App.definitions = (() => {
         /* RABBIT HOLE ACTIVITIES */
         rabbit_hole_activities: [
             {
-                name: 'Go to movies',
+                name: 'В кино',
                 duration: App.constants.ONE_HOUR * 0.75,
                 onEnd: () => {
                     App.pet.stats.current_fun += 100;
@@ -2880,7 +2878,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Visit library',
+                name: 'В библиотеку',
                 duration: App.constants.ONE_HOUR * 0.25,
                 withAnother: true,
                 onEnd: () => {
@@ -2888,7 +2886,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Go to restaurant',
+                name: 'В ресторан',
                 duration: App.constants.ONE_HOUR * 0.75,
                 onEnd: () => {
                     App.pet.stats.current_fun += 25;
@@ -2897,7 +2895,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Go to coffee shop',
+                name: 'В кофейню',
                 duration: App.constants.ONE_HOUR * 0.35,
                 onEnd: () => {
                     App.pet.stats.current_fun += 35;
@@ -2906,7 +2904,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Visit museum',
+                name: 'В музей',
                 duration: App.constants.ONE_HOUR * 1,
                 onEnd: () => {
                     App.pet.stats.current_fun += 100;
@@ -2916,7 +2914,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Visit food festival',
+                name: 'На фуд-фест',
                 duration: App.constants.ONE_HOUR * 1,
                 onEnd: () => {
                     App.pet.stats.current_fun += random(-50, 50);
@@ -2925,7 +2923,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Attend concert',
+                name: 'На концерт',
                 duration: App.constants.ONE_HOUR * 1.5,
                 onEnd: () => {
                     App.pet.stats.current_fun += 100;
@@ -2935,7 +2933,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Visit theme park',
+                name: 'В парк развлечений',
                 duration: App.constants.ONE_HOUR * 2,
                 onEnd: () => {
                     App.pet.stats.current_fun += 100;
@@ -2945,7 +2943,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Relax in nebula spa',
+                name: 'Спа в туманности',
                 duration: App.constants.ONE_HOUR * 0.5,
                 onEnd: () => {
                     App.pet.stats.current_fun += 35;
@@ -2956,7 +2954,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Explore alien forest',
+                name: 'Инопланетный лес',
                 duration: App.constants.ONE_HOUR * 0.32,
                 onEnd: () => {
                     App.pet.stats.current_fun += 30;
@@ -2964,7 +2962,7 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Go to starlight disco',
+                name: 'Диско «Звёздный свет»',
                 duration: App.constants.ONE_HOUR * 1.5,
                 isNew: false,
                 onEnd: () => {
@@ -2977,35 +2975,28 @@ App.definitions = (() => {
 
         /* GAMEPLAY BUFFS */
         gameplay_buffs: {
-            // garden buffs
             doubleHarvest: {
                 key: 'doubleHarvest',
-                name: '+ Harvests',
-                description: 'Increases the amount of harvests in the garden.',
+                name: '+ Урожай',
+                description: 'Больше урожая в саду.',
                 type: 'garden',
             },
             increasedWateredDuration: {
                 key: 'increasedWateredDuration',
-                name: '+ Wet Duration',
-                description: 'Increases the amount the plants stay hydrated by 3 hours.',
+                name: '+ Влага',
+                description: 'Растения дольше остаются политой (+3 ч).',
                 type: 'garden',
             },
             longerDeathDuration: {
                 key: 'longerDeathDuration',
-                name: '+ Health Duration',
-                description: 'Increases the time before the plants start dying without water by 8 hours.',
+                name: '+ Здоровье',
+                description: 'Растения дольше не вянут без воды (+8 ч).',
                 type: 'garden',
             },
-            // alwaysWatered: {
-            //     key: 'alwaysWatered',
-            //     name: '∞ Infinite Water',
-            //     description: 'Plants stay watered infinitely.',
-            //     type: 'garden',
-            // },
             shorterGrowthDelay: {
                 key: 'shorterGrowthDelay',
-                name: '+ Growth',
-                description: 'Makes plants grow faster.',
+                name: '+ Рост',
+                description: 'Растения растут быстрее.',
                 type: 'garden',
             },
         }

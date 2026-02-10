@@ -384,7 +384,7 @@ const App = {
             App.awayTime = message;
 
             if(awaySeconds > 30 && App.ENV !== 'dev'){
-                App.displayConfirm(`Welcome back!\n<b>${App.petDefinition.name}</b> missed you in those <b>${message}</b> you were away`, [
+                App.displayConfirm(`С возвращением!\n<b>${App.petDefinition.name}</b> скучал(а) по тебе всё это <b>${message}</b>`, [
                     {
                         name: 'ok',
                         onclick: () => {}
@@ -789,7 +789,7 @@ const App = {
         const {addEvent} = App;
 
         function showAlreadyUsed(){
-            App.displayPopup(`You can only use this code once`);
+            App.displayPopup(`Этот код можно использовать только один раз`);
             return false;
         }
 
@@ -872,7 +872,7 @@ const App = {
                 break;
             default:
                 const showInvalidError = () => {
-                    App.displayPopup(`Invalid code`);
+                    App.displayPopup(`Неверный код`);
                 }
 
                 const command = /(\S+?) *: *(.+)/g.exec(rawCode);
@@ -895,22 +895,22 @@ const App = {
     
                             let def = new PetDefinition().loadStats(petDef);
                             
-                            App.displayConfirm(`Are you trying to load <div style="font-weight: bold">${def.getCSprite()} ${def.name}?</div>`, [
+                            App.displayConfirm(`Загрузить <div style="font-weight: bold">${def.getCSprite()} ${def.name}?</div>`, [
                                 {
-                                    name: 'yes',
+                                    name: 'Да',
                                     onclick: () => {
-                                        App.displayConfirm(`What do you want to do with ${def.name}?`, [
+                                        App.displayConfirm(`Что сделать с ${def.name}?`, [
                                             {
-                                                name: 'as active pet',
+                                                name: 'Сделать питомцем',
                                                 onclick: () => {
-                                                    App.displayConfirm(`Are you sure? This will <b>remove</b> your current pet`, [
+                                                    App.displayConfirm(`Уверен? Текущий питомец будет <b>заменён</b>`, [
                                                         {
-                                                            name: 'yes',
+                                                            name: 'Да',
                                                             onclick: () => {
-                                                                App.displayPopup('Loading...', App.INF);
+                                                                App.displayPopup('Загрузка...', App.INF);
 
                                                                 App.loadFromJson(json, () => {
-                                                                    App.displayPopup(`${def.name} is now your pet!`, App.INF);
+                                                                    App.displayPopup(`${def.name} теперь твой питомец!`, App.INF);
                                                                     setTimeout(() => {
                                                                         location.reload();  
                                                                     }, 3000);
@@ -918,7 +918,7 @@ const App = {
                                                             }
                                                         },
                                                         {
-                                                            name: 'no',
+                                                            name: 'Нет',
                                                             onclick: () => {}
                                                         },
     
@@ -928,15 +928,15 @@ const App = {
                                             },
                                             {
                                                 _ignore: json.user_id === App.userId,
-                                                name: 'add friend',
+                                                name: 'Добавить в друзья',
                                                 onclick: () => {
                                                     App.petDefinition.addFriend(def);
                                                     App.closeAllDisplays();
-                                                    return App.displayPopup(`${def.name} was added to the friends list!`, 3000);
+                                                    return App.displayPopup(`${def.name} добавлен(а) в список друзей!`, 3000);
                                                 }
                                             },
                                             {
-                                                name: 'cancel',
+                                                name: 'Отмена',
                                                 class: 'back-btn',
                                                 onclick: () => {}
                                             }
@@ -944,22 +944,22 @@ const App = {
                                     }
                                 },
                                 {
-                                    name: 'no',
+                                    name: 'Нет',
                                     class: 'back-btn',
                                     onclick: () => {}
                                 },
                             ])
                         } catch(e) {    
                             console.error(e);
-                            return App.displayPopup('Character code is corrupted');
+                            return App.displayPopup('Код персонажа повреждён');
                         }
                         break;
                     
                     case 'setchar':
                         const sprite = PetDefinition.generateFullCSprite(commandPayload);
-                        App.displayConfirm(`Are you sure you want to change your pet's sprite to ${sprite}?`, [
+                        App.displayConfirm(`Сменить облик питомца на ${sprite}?`, [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: () => {
                                     App.petDefinition.sprite = commandPayload;
                                     App.save();
@@ -967,7 +967,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 onclick: () => {}
                             }
                         ])
@@ -1592,9 +1592,9 @@ const App = {
         editDisplay.querySelector('#apply').onclick = () => {
             App.playSound('resources/sounds/ui_click_03.ogg');
             App.vibrate();
-            App.displayConfirm(`Do you want to save the current placement?`, [
+            App.displayConfirm(`Сохранить текущую расстановку?`, [
                 {
-                    name: 'yes',
+                    name: 'Да',
                     onclick: () => {
                         gameObject.def.x = gameObject.x;
                         gameObject.def.y = gameObject.y;
@@ -1603,7 +1603,7 @@ const App = {
                     }
                 },
                 {
-                    name: 'no',
+                    name: 'Нет',
                     class: 'back-btn',
                     onclick: () => {}
                 }
@@ -1612,9 +1612,9 @@ const App = {
         editDisplay.querySelector('#cancel').onclick = () => {
             App.playSound('resources/sounds/ui_click_02.ogg');
             App.vibrate();
-            App.displayConfirm(`Are you sure you want to cancel the current placement?`, [
+            App.displayConfirm(`Отменить текущую расстановку?`, [
                 {
-                    name: 'yes',
+                    name: 'Да',
                     onclick: () => {
                         gameObject.x = objectInitialPosition.x;
                         gameObject.y = objectInitialPosition.y;
@@ -1623,7 +1623,7 @@ const App = {
                     }
                 },
                 {
-                    name: 'no',
+                    name: 'Нет',
                     class: 'back-btn',
                     onclick: () => {}
                 }
@@ -2062,7 +2062,7 @@ const App = {
         },
         show_attended_school_limit_message: function(){
             const formattedResetTime = moment(App.constants.SCHOOL.resetTime).format('h:mmA');
-            return App.displayPopup(`<b>${App.petDefinition.name}</b> has attended all of their classes today!<br><br>Come back tomorrow after <b>${formattedResetTime}</b>`, 4000);
+            return App.displayPopup(`<b>${App.petDefinition.name}</b> сегодня уже был(а) на всех занятиях!<br><br>Заходи завтра после <b>${formattedResetTime}</b>`, 4000);
         },
         go_to_school: function(){
             Activities.goToSchool(() => App.handlers.open_activity_list(true))
@@ -2073,13 +2073,13 @@ const App = {
             }
             return App.displayList([
                 {
-                    name: `stand work`,
+                    name: `работа в ларьке`,
                     onclick: () => {
                         Activities.standWork();
                     }
                 },
                 {
-                    name: 'office work',
+                    name: 'офисная работа',
                     onclick: () => {
                         Activities.officeWork();
                     }
@@ -2105,7 +2105,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => {}
                             }
@@ -2132,7 +2132,7 @@ const App = {
                                     }
                                 },
                                 {
-                                    name: 'no',
+                                    name: 'Нет',
                                     class: 'back-btn',
                                     onclick: () => {}
                                 }
@@ -2177,7 +2177,7 @@ const App = {
                                     })
                                     App.displayConfirm(`Do you want to add ${def.getCSprite()} ${def.name} to your friends list?`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 App.closeAllDisplays();
                                                 const addedFriend = App.petDefinition.addFriend(def, 1);
@@ -2192,7 +2192,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         },
@@ -2493,19 +2493,19 @@ const App = {
                     }
                 },
                 {
-                    name: `sleep ${App.isSleepHour() ? App.getBadge('<div style="margin-left: auto; padding: 2px"> <i class="fa-solid fa-moon"></i> <small>bedtime!</small> </div>', 'night') : ''}`,
+                    name: `sleep ${App.isSleepHour() ? App.getBadge('<div style="margin-left: auto; padding: 2px"> <i class="fa-solid fa-moon"></i> <small>время спать!</small> </div>', 'night') : ''}`,
                     onclick: () => {
                         App.handlers.sleep();
                     }
                 },
                 {
-                    name: `Backyard`,
+                    name: `Двор`,
                     onclick: () => {
                         Activities.goToGarden();
                     }
                 },
                 {
-                    name: `Garden`,
+                    name: `Сад`,
                     onclick: () => {
                         Activities.goToInnerGarden();
                     }
@@ -2513,14 +2513,14 @@ const App = {
                 {
                     name: `pet`,
                     onclick: () => {
-                        App.displayPopup(`Tap the screen to pet <b>${App.petDefinition.name}</b><br><br>Don't tap for a few seconds to stop petting`, 2800, () => {
+                        App.displayPopup(`Жми на экран, чтобы гладить <b>${App.petDefinition.name}</b><br><br>Не жми несколько секунд, чтобы остановиться`, 2800, () => {
                             Activities.pet();
                         });
                     }
                 },
                 {
                     _ignore: !App.petDefinition.getParents(),
-                    name: `stay with parents`,
+                    name: `остаться у родителей`,
                     onclick: () => {
                         if((App.hour < App.constants.PARENT_DAYCARE_START || App.hour >= App.constants.PARENT_DAYCARE_END)){
                             return App.displayPopup(`You can only leave ${App.petDefinition.name} at their parents house between <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> and <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>`, 4000)
@@ -2528,7 +2528,7 @@ const App = {
 
                         App.displayConfirm(`${App.petDefinition.name} will be with their parents, who will look after them from <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> to <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>, is that ok?`, [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: () => {
                                     App.closeAllDisplays();
                                     Activities.stayAtParents();
@@ -2536,7 +2536,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => { }
                             }
@@ -2577,7 +2577,7 @@ const App = {
                         if(!App.isRoomFurnishable()){
                             return App.displayConfirm(`Your room came fully furnished.<br><br>Would you like to remove the default furniture set and customize it?`, [
                                 {
-                                    name: 'yes',
+                                    name: 'Да',
                                     onclick: () => {
                                         App.closeAllDisplays();
                                         Activities.redecorRoom(() => {
@@ -2588,7 +2588,7 @@ const App = {
                                     }
                                 },
                                 {
-                                    name: 'no',
+                                    name: 'Нет',
                                     onclick: () => {},
                                     class: 'back-btn',
                                 }
@@ -2930,7 +2930,7 @@ const App = {
                                                                 onclick: () => {
                                                                     App.displayConfirm(`Are you sure you want to uninstall <b>${modInfo.name}</b>?`, [
                                                                         {
-                                                                            name: 'yes',
+                                                                            name: 'Да',
                                                                             onclick: () => {
                                                                                 App.mods.splice(App.mods.indexOf(modInfo), 1);
                                                                                 App.save();
@@ -2939,7 +2939,7 @@ const App = {
                                                                             }
                                                                         },
                                                                         {
-                                                                            name: 'no',
+                                                                            name: 'Нет',
                                                                             class: 'back-btn',
                                                                             onclick: () => {}
                                                                         }
@@ -3071,7 +3071,7 @@ const App = {
                                     if(!App.settings.automaticAging){
                                         App.displayConfirm(`Are you sure? This will make your pets automatically age up after a certain amount of time`, [
                                             {
-                                                name: 'yes',
+                                                name: 'Да',
                                                 onclick: () => {
                                                     App.settings.automaticAging = true;
                                                     App.displayPopup(`Automatic aging turned on`);
@@ -3080,7 +3080,7 @@ const App = {
                                                 }
                                             },
                                             {
-                                                name: 'no',
+                                                name: 'Нет',
                                                 class: 'back-btn',
                                                 onclick: () => {}
                                             }
@@ -3465,7 +3465,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => { }
                             }
@@ -3478,7 +3478,7 @@ const App = {
                     onclick: () => {
                         App.displayConfirm('Are you sure you want to completely delete your data? this will reset your pets, achievements, online id and everything else!', [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: () => {
                                     App.displayConfirm('Are you sure? There is no way to revert this.', [
                                         {
@@ -3498,7 +3498,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         }
@@ -3507,7 +3507,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => { }
                             }
@@ -4176,7 +4176,7 @@ const App = {
                                                         <button id="effects" style="display: none; position: absolute; bottom: 0; right: 0" class="generic-btn stylized"><b>effects</b></button>
                                                     `, [
                                                         {
-                                                            name: 'yes',
+                                                            name: 'Да',
                                                             onclick: () => {
                                                                 food.ingredients.forEach(ingredient => {
                                                                     if(App.pet.inventory.harvests[ingredient] > 0)
@@ -4186,7 +4186,7 @@ const App = {
                                                             },
                                                         },
                                                         {
-                                                            name: 'no',
+                                                            name: 'Нет',
                                                             class: 'back-btn',
                                                             onclick: () => {}
                                                         }
@@ -4974,7 +4974,7 @@ const App = {
                                     onclick: () => {
                                         return App.displayConfirm(`Are you sure you want to remove this furniture from the room?`, [
                                             {
-                                                name: 'yes',
+                                                name: 'Да',
                                                 onclick: () => {
                                                     savedFurniture.def.isActive = false;
                                                     App.handleFurnitureSpawn();
@@ -4983,7 +4983,7 @@ const App = {
                                                 }
                                             },
                                             {
-                                                name: 'no',
+                                                name: 'Нет',
                                                 class: 'back-btn',
                                                 onclick: () => {}
                                             }
@@ -5230,7 +5230,7 @@ const App = {
 
                         return App.displayConfirm(`Do you want to enter the Underworld? This will cost you x1 ${ticketSpan}`, [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: () => {
                                     App.closeAllDisplays();
                                     App.addNumToObject(App.pet.inventory.misc, 'underworld tickets', -1);
@@ -5239,7 +5239,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => {}
                             },
@@ -5281,7 +5281,7 @@ const App = {
                             const confirmFn = (otherPet) => {
                                 App.displayConfirm(`Are you sure you want to <b>${hole.name}</b>${otherPet ? ` with <i>${otherPet.name}</i>`: ''}? <br><br> ${App.petDefinition.name} will go out for <b>${moment(hole.duration + Date.now()).toNow(true)}</b>`, [
                                     {
-                                        name: 'yes',
+                                        name: 'Да',
                                         onclick: () => {
                                             App.pet.stats.current_rabbit_hole = {
                                                 name: hole.name,
@@ -5295,7 +5295,7 @@ const App = {
                                         }
                                     },
                                     {
-                                        name: 'no',
+                                        name: 'Нет',
                                         class: 'back-btn',
                                         onclick: () => {}
                                     },
@@ -5385,7 +5385,7 @@ const App = {
 
                             App.displayConfirm(`This will turn <b>${friendDef.name}</b> into a ${monsterSpan},</div> do you want to continue?`, [
                                 {
-                                    name: 'yes',
+                                    name: 'Да',
                                     onclick: () => {
                                         Activities.ghost_convertOtherPet(
                                             friendDef,
@@ -5394,7 +5394,7 @@ const App = {
                                     },
                                 },
                                 {
-                                    name: 'no',
+                                    name: 'Нет',
                                     class: 'back-btn',
                                     onclick: () => {},
                                 },
@@ -5431,7 +5431,7 @@ const App = {
 
                             App.displayConfirm(`This will turn <b>${friendDef.name}</b> into an ${angelSpan},</div> do you want to continue?`, [
                                 {
-                                    name: 'yes',
+                                    name: 'Да',
                                     onclick: () => {
                                         Activities.ghost_convertOtherPet(
                                             friendDef,
@@ -5440,7 +5440,7 @@ const App = {
                                     },
                                 },
                                 {
-                                    name: 'no',
+                                    name: 'Нет',
                                     class: 'back-btn',
                                     onclick: () => {},
                                 },
@@ -5504,13 +5504,13 @@ const App = {
 
                                     return App.displayConfirm(`This will turn your pet into ${isMonsterGhost ? monsterSpan : angelSpan} are you sure you want to continue?`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 Activities.ghost_beConverted(friendDef, friendDef.stats.is_ghost)
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => {}
                                         }
@@ -5537,7 +5537,7 @@ const App = {
 
                                     App.displayConfirm(`Do you want to go on a date with <div>${icon} ${friendDef.name}</div>?`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 Activities.goOnDate(friendDef);
                                             }
@@ -5638,7 +5638,7 @@ const App = {
                                 onclick: () => {
                                     App.displayConfirm(`Are you sure you want to give gift to ${icon} ${name}?`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 App.closeAllDisplays();
                                                 App.handlers.open_item_list(null, null, (item) => {
@@ -5650,7 +5650,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         }
@@ -5663,7 +5663,7 @@ const App = {
                                 onclick: () => {
                                     App.displayConfirm(`Are you sure you want to unfriend ${icon} ${name}?`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 friendsList.close();
                                                 friendActivitiesList.close();
@@ -5672,7 +5672,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         }
@@ -5714,7 +5714,7 @@ const App = {
 
                         return App.displayConfirm(`Enter Hubchi?`, [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: async () => {
                                     App.closeAllDisplays();
                                     Activities.onlineHubTransition(async (fadeOverlay) => {
@@ -5743,7 +5743,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => {}
                             },
@@ -5904,13 +5904,13 @@ const App = {
                         }
                         App.displayConfirm(`This will age up ${App.petDefinition.name}<br>Are you sure?`, [
                             {
-                                name: 'yes',
+                                name: 'Да',
                                 onclick: () => {
                                     Activities.birthday();
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => {},
                             }
@@ -5957,7 +5957,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'primary solid',
                                 onclick: () => {}
                             }
@@ -6019,15 +6019,15 @@ const App = {
                                                     
                                                     App.displayConfirm(`Are you trying to add <div style="font-weight: bold">${def.getCSprite()} ${def.name}?</div> as a friend?`, [
                                                         {
-                                                            name: 'yes',
+                                                            name: 'Да',
                                                             onclick: () => {
                                                                 App.petDefinition.addFriend(def);
                                                                 App.closeAllDisplays();
-                                                                return App.displayPopup(`${def.name} was added to the friends list!`, 3000);
+                                                                return App.displayPopup(`${def.name} добавлен(а) в список друзей!`, 3000);
                                                             }
                                                         },
                                                         {
-                                                            name: 'no',
+                                                            name: 'Нет',
                                                             class: 'back-btn',
                                                             onclick: () => {}
                                                         },
@@ -6205,7 +6205,7 @@ const App = {
                                 onclick: () => {
                                     App.displayConfirm(`Do you want to send friend request to<br><b>${otherPetDef.getCSprite()} ${otherPetDef.name}?</b>`, [
                                         {
-                                            name: 'yes',
+                                            name: 'Да',
                                             onclick: () => {
                                                 let willAcceptFriendRequest = random(0, 1) == 1;
                                                 if(!willAcceptFriendRequest){
@@ -6220,7 +6220,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'no',
+                                            name: 'Нет',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         }
