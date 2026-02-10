@@ -1,34 +1,26 @@
-![Tamaweb](https://img.itch.zone/aW1nLzIwNjE0MTY1LnBuZw==/original/GkKbBT.png)
+# Tamaweb — виртуальный питомец (русский интерфейс)
 
-### Tamaweb is a feature-rich virtual pet game.
+Полноценная игра-тамагочи на основе [Tamaweb](https://github.com/autosam/Tamaweb). Часть интерфейса переведена на русский.
 
-A Virtual Pet game project inspired by modern Tamagotchi devices, aiming to bring a pure virtual pet experience to multiple devices. Raise your pet from a baby to an elder, teaching them skills, taking them on adventures, customizing their home and a lot more!
+## Как открыть по ссылке (GitHub Pages)
 
-### Platforms:
-- Browser
-- Windows
-- Android
-- PWA
+1. Создай на GitHub репозиторий **tamaweb**: https://github.com/new (имя: `tamaweb`, без README).
+2. Выполни в папке проекта:
+   ```
+   git remote add origin https://github.com/ТВОЙ_ЛОГИН/tamaweb.git
+   git push -u origin main
+   ```
+3. В репозитории: **Settings** → **Pages** → **Source**: **Deploy from a branch** → **Branch**: **main** → **/ (root)** → Save.
+4. Через 1–2 минуты игра будет доступна по адресу: **https://ТВОЙ_ЛОГИН.github.io/tamaweb/**
 
-### 🤝 Contributing
-Contributions are welcome! If you find a bug or have an idea for a new feature, feel free to open an issue or submit a pull request.
+## Локальный запуск
 
-### 💬 Join Our Community
-Connect with other players, get updates, give suggestions and share your progress on our official Discord server.
+Раздай папку любым статическим сервером, например:
+```bash
+npx serve -l 5000
+```
+Открой в браузере: http://localhost:5000
 
-[Join the Discord Server](https://tamawebgame.github.io/discord)
+## Лицензия
 
-### 📄 License & Terms
-Distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License.
-
-**For a full breakdown of the terms of use, please see the [Terms of Use](TERMS_OF_USE.md) file.**
-
-### 🔗 Official Links
-[Official Website](https://tamawebgame.github.io/) • [itch Version](https://samandev.itch.io/tamaweb) • [Official Wiki](https://tamaweb.wiki.gg/) • [Discord](https://tamawebgame.github.io/discord) • [Blog](https://tamawebgame.github.io/blog) • [Instagram](https://www.instagram.com/tamaweb_game/) • [TikTok](https://www.tiktok.com/@samandevgames?_t=8rmMbdc7Vnb&_r=1)
-
-### 📧 Contact
-🌐 https://tamawebgame.github.io
-
-✉️ autosam.sm@gmail.com
-
-🧑‍💻 Project Link: https://github.com/autosam/Tamaweb
+Оригинал Tamaweb: CC BY-NC-SA 4.0 (autosam). См. LICENSE в репозитории.
