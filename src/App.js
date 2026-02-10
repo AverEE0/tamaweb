@@ -4,6 +4,7 @@ const App = {
     mouse: { x: 0, y: 0, isInBounds : false },
     userId: '_', userName: null, sessionId: Math.round(Math.random() * 9999999999),
     ENV: location.port == 5500 ? 'dev' : 'prod', isOnItch: false, isOnElectronClient: false,
+    isMiniApp: !!(typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp),
     shellBackground: '', deferredInstallPrompt: null,
 
     gameEventsHistory: {}, 
@@ -567,6 +568,23 @@ const App = {
     },
     applySettings: function(){
         const graphicsWrapper = document.querySelector('.graphics-wrapper');
+        const root = document.querySelector('.root');
+
+        // Telegram Mini App: без корпуса, на весь экран
+        if(this.isMiniApp){
+            this.settings.displayShell = false;
+            this.settings.displayShellButtons = false;
+            this.settings.displayShellLogo = false;
+            graphicsWrapper.classList.add('miniapp');
+            if(root) root.classList.add('miniapp');
+            if(window.Telegram && window.Telegram.WebApp){
+                window.Telegram.WebApp.ready();
+                window.Telegram.WebApp.expand();
+            }
+        } else {
+            graphicsWrapper.classList.remove('miniapp');
+            if(root) root.classList.remove('miniapp');
+        }
 
         // fullscreen param
         const isFullscreen = new URLSearchParams(location.search).has('fullscreen');
@@ -2213,7 +2231,7 @@ const App = {
                 }
             }, 1000);
         },
-        show_set_pet_name_dialog: function(text = 'Name your new egg:'){
+        show_set_pet_name_dialog: function(text = 'Назови своё новое яйцо:'){
             const { GENDERS } = App.constants;
             const cycleBetweenGenders = (evt) => {
                 const currentIndex = GENDERS.indexOf(App.pet.stats.gender);
@@ -4323,7 +4341,7 @@ const App = {
         },
         copyToClipboard: (content) => {
             navigator.clipboard.writeText(content);
-            App.displayPopup('Copied!');
+            App.displayPopup('Скопировано!');
         },
         open_plant_stats: function(plant){
             const list = UI.genericListContainer();
@@ -4909,7 +4927,7 @@ const App = {
                                     type: 'text',
                                 },
                                 {
-                                    name: 'edit position',
+                                    name: 'Изменить положение',
                                     onclick: () => {
                                         App.closeAllDisplays();
                                         App.editFurniture(savedFurniture, () => {
@@ -4918,7 +4936,7 @@ const App = {
                                     }
                                 },
                                 {
-                                    name: 'remove',
+                                    name: 'Убрать',
                                     class: 'back-btn',
                                     onclick: () => {
                                         return App.displayConfirm(`Убрать эту мебель из комнаты?`, [
@@ -4975,10 +4993,10 @@ const App = {
                         })
 
                         if(!App.ownedFurniture?.length || !list.length){
-                            return App.displayPopup("You don't own any furniture, purchase some from the mall")
+                            return App.displayPopup("Нет мебели. Купи в ТЦ.")
                         }
 
-                        return App.displayList(list, null, 'Add furniture');
+                        return App.displayList(list, null, 'Добавить мебель');
                     }
                 })
             }
@@ -5163,7 +5181,7 @@ const App = {
                                 `, 
                                 [
                                     {
-                                        name: 'open shop',
+                                        name: 'Открыть магазин',
                                         onclick: () => {
                                             openPurchasableList()
                                         }
@@ -5207,7 +5225,7 @@ const App = {
                     }
                 },
                 {
-                    name: 'Shop',
+                    name: 'Магазин',
                     onclick: openPurchasableList,
                 },
             ], backFn)
@@ -5258,14 +5276,14 @@ const App = {
                                     type: 'info',
                                 },
                                 {
-                                    name: 'Alone',
+                                    name: 'Один(а)',
                                     onclick: () => {
                                         confirmFn()
                                         return true;
                                     }
                                 },
                                 {
-                                    name: `With a friend`,
+                                    name: `С другом`,
                                     onclick: () => {
                                         App.handlers.open_friends_list(
                                             (selectedFriend) => {
@@ -5283,7 +5301,7 @@ const App = {
                     })),
                 {
                     type: 'info',
-                    name: `${App.petDefinition.name} will visit their home planet to do one of <i>Homeworld Getaway</i> activities`
+                    name: `${App.petDefinition.name} отправится на родную планету в одно из занятий <i>Побега с родной планеты</i>`
                 },
             ], backFn)
         },
@@ -5411,7 +5429,7 @@ const App = {
                         if (onClickOverride) return onClickOverride(friendDef);
                         const friendActivitiesList = App.displayList([
                             {
-                                name: 'info',
+                                name: 'Инфо',
                                 onclick: () => {
                                     const list = UI.genericListContainer();                                
                                     UI.genericListContainerContent(`
@@ -5426,7 +5444,7 @@ const App = {
                                             </div>
                                             <div></div>
                                             <div class="relative flex flex-dir-row align-center flex-gap-1">
-                                                <div class="stats-label">Friendship</div>
+                                                <div class="stats-label">Дружба</div>
                                                 <b class="outlined-icon flex flex-center" style="width: 18px;">${App.getIcon('smile', true)}</b> 
                                                 ${App.createProgressbar( friendDef.getFriendship() / 100 * 100 ).node.outerHTML}
                                             </div>
@@ -5438,13 +5456,13 @@ const App = {
                             },
                             {
                                 _ignore: !friendDef.stats.is_ghost || friendDef.stats.is_ghost === App.pet.stats.is_ghost,
-                                name: `${isMonsterGhost ? monsterIcon : angelIcon} <span style="color: ${isMonsterGhost ? 'red' : 'forestgreen'};">Be converted</span>`,
+                                name: `${isMonsterGhost ? monsterIcon : angelIcon} <span style="color: ${isMonsterGhost ? 'red' : 'forestgreen'};">Превратить</span>`,
                                 onclick: () => {
                                     if(friendDef.stats.player_friendship <= 98){
                                         return App.displayPopup(`
-                                            You need to be best friends with 
-                                            <b>${friendDef.name}</b> 
-                                            before asking to be converted to
+                                            Нужна максимальная дружба с 
+                                            <b>${friendDef.name}</b>, 
+                                            чтобы просить превращение в
                                             <div>
                                                 ${isMonsterGhost ? monsterSpan : angelSpan}
                                             </div>
@@ -5478,7 +5496,7 @@ const App = {
                             ),
                             {
                                 _ignore: App.petDefinition.lifeStage < PetDefinition.LIFE_STAGE.adult || friendDef.lifeStage < PetDefinition.LIFE_STAGE.adult || friendDef.stats.is_player_family,
-                                name: `go on date`,
+                                name: `На свидание`,
                                 onclick: () => {
                                     if (friendDef.getFriendship() < 60) {
                                         return App.displayPopup(`Дружба ${App.petDefinition.name} и ${friendDef.name} слишком слабая — на свидание не согласны.`, 5000);
@@ -5492,7 +5510,7 @@ const App = {
                                             }
                                         },
                                         {
-                                            name: 'cancel',
+                                            name: 'Отмена',
                                             class: 'back-btn',
                                             onclick: () => { }
                                         }
@@ -5502,7 +5520,7 @@ const App = {
                                 }
                             },
                             {
-                                name: `Hang out ${App.getBadge()}`,
+                                name: `Потусить ${App.getBadge()}`,
                                 onclick: () => {
                                     const handleHangout = (scene, isPlayerHost = false) => {
                                         App.closeAllDisplays();
@@ -5567,7 +5585,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'invite',
+                                name: 'Пригласить',
                                 onclick: () => {
                                     App.closeAllDisplays();
                                     Activities.invitePlaydate(friendDef);
@@ -5575,7 +5593,7 @@ const App = {
                             },
                             {
                                 _disable: App.petDefinition.lifeStage <= PetDefinition.LIFE_STAGE.baby,
-                                name: 'park',
+                                name: 'Парк',
                                 onclick: () => {
                                     App.closeAllDisplays();
                                     Activities.goToPark(friendDef);
@@ -5583,7 +5601,7 @@ const App = {
                             },
                             {
                                 _disable: App.petDefinition.lifeStage <= PetDefinition.LIFE_STAGE.child,
-                                name: 'gift',
+                                name: 'Подарок',
                                 onclick: () => {
                                     App.displayConfirm(`Подарить подарок ${icon} ${name}?`, [
                                         {
@@ -5608,7 +5626,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'unfriend',
+                                name: 'Удалить из друзей',
                                 onclick: () => {
                                     App.displayConfirm(`Удалить из друзей ${icon} ${name}?`, [
                                         {
@@ -5799,7 +5817,7 @@ const App = {
                                         const totalPrice = getTotalPrice();
                                         return App.displayConfirm(`Оформить заказ на <b>$${getTotalPrice()}</b>?`, [
                                             {
-                                                name: 'Yes',
+                                                name: 'Да',
                                                 onclick: () => {
                                                     if(!App.pay(totalPrice)) return false;
                                                     App.sendAnalytics('online_food_order', totalPrice);
@@ -5818,7 +5836,7 @@ const App = {
                                                 }
                                             },
                                             {
-                                                name: 'No',
+                                                name: 'Нет',
                                                 class: 'back-btn',
                                                 onclick: () => {}
                                             }
@@ -5845,7 +5863,7 @@ const App = {
                 },
                 {
                     _ignore: App.petDefinition.lifeStage >= PetDefinition.LIFE_STAGE.elder,
-                    name: 'have birthday',
+                    name: 'День рождения',
                     onclick: () => {
                         let nextBirthday = App.petDefinition.getNextBirthdayDate();
                         if(moment().isBefore( nextBirthday )){
@@ -5868,7 +5886,7 @@ const App = {
                 },
                 {
                     _ignore: true,
-                    name: 'doctor visit',
+                    name: 'К врачу',
                     onclick: () => {
                         // App.displayPopup(`${App.pet.stats.current_health}`, 1000);
                         Activities.inviteDoctorVisit();
@@ -6125,7 +6143,7 @@ const App = {
 
             App.displayList([
                 {
-                    name: 'make post',
+                    name: 'Создать пост',
                     onclick: () => {
                         App.petDefinition.stats.current_fun += random(1, 5);
                         App.pet.stats.current_expression += 0.5;
@@ -6134,14 +6152,14 @@ const App = {
                     }
                 },
                 {
-                    name: 'explore posts',
+                    name: 'Лента',
                     onclick: () => {
                         showRandomPost();
                         return true;
                     }
                 },
                 {
-                    name: 'find friends',
+                    name: 'Найти друзей',
                     onclick: () => {
                         const seed = App.getDayId(true);
                         let potentialFriends = new Array(8)
@@ -6294,7 +6312,7 @@ const App = {
                     onclick: () => {
                         return App.displayList([
                             {
-                                name: 'Track',
+                                name: 'Отслеживать',
                                 onclick: () => startClassGame(`Keep track of the card with the ${App.getIcon('star', true)} symbol and select it after the shuffle!`, () => Activities.school_CardShuffleGame({
                                     activeCards: 1,
                                     maxCards: 4,
@@ -6541,7 +6559,7 @@ const App = {
         open_sell_list: function(){
             App.displayList([
                 {
-                    name: 'food',
+                    name: 'Еда',
                     onclick: () => {
                         App.handlers.open_food_list({sellMode: true});
                         return true;
@@ -6611,7 +6629,7 @@ const App = {
                 },
                 {
                     _disable: App.petDefinition.lifeStage < PetDefinition.LIFE_STAGE.child,
-                    name: 'rod rush',
+                    name: 'Рыбалка',
                     onclick: () => {
                         App.displayPopup(`Останови указатель в нужный момент!`, tutorialDisplayTime, () => Activities.barTimingGame())
                         return false;
@@ -7409,7 +7427,7 @@ const App = {
             .filter(filterFn);
 
         if(!harvestsToShow.length){
-            return App.getEmptyStateUI('Empty inventory');
+            return App.getEmptyStateUI('Инвентарь пуст');
         }
 
         return `
@@ -7545,7 +7563,7 @@ const App = {
             App.save = () => {};
             const display = App.displayConfirm(`${App.getIcon('warning')} Ошибка при загрузке системы сохранений.`, [
                 {
-                    name: 'Reload',
+                    name: 'Перезагрузить',
                     class: 'back-btn',
                     onclick: () => {
                         window.location.reload();
@@ -7557,7 +7575,7 @@ const App = {
                     onclick: () => {
                         return App.displayConfirm(`Можно потерять прогресс, если продолжить!`, [
                             {
-                                name: 'Continue',
+                                name: 'Продолжить',
                                 onclick: () => {
                                     App.save = _save;
                                     display.close();
@@ -7565,7 +7583,7 @@ const App = {
                                 }
                             },
                             {
-                                name: 'Cancel',
+                                name: 'Отмена',
                                 class: 'back-btn',
                                 onclick: () => {}
                             }
@@ -7930,7 +7948,7 @@ const App = {
         function showError(){
             App.displayConfirm(`Камеру на этом устройстве загрузить нельзя`, [
                 {
-                    name: 'back',
+                    name: 'Назад',
                     onclick: () => {
                         close(-1);
                     }
@@ -8142,7 +8160,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
         App.addEvent(`pwa_install_notice_01`, () => {
             App.displayConfirm(`Установить <b>Tamaweb</b> как приложение?`, [
                 {
-                    name: 'install',
+                    name: 'Установить',
                     onclick: () => {
                         App.installAsPWA();
                     }
