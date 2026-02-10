@@ -290,9 +290,9 @@ const Missions = {
                     _disable: chest.price > Missions.currentPts,
                     class: 'large',
                     onclick: () => {
-                        App.displayConfirm(`Open the <br> <b>${chest.name}</b> <br> for <br> ${App.getIcon('coins') + chest.price}?`, [
+                        App.displayConfirm(`Открыть <br> <b>${chest.name}</b> <br> за <br> ${App.getIcon('coins') + chest.price}?`, [
                             {
-                                name: `yes`,
+                                name: `Да`,
                                 onclick: () => {
                                     chest.onClaim();
                                     Missions.currentPts -= chest.price;
@@ -303,7 +303,7 @@ const Missions = {
                                 }
                             },
                             {
-                                name: 'no',
+                                name: 'Нет',
                                 class: 'back-btn',
                                 onclick: () => {}
                             }
@@ -313,7 +313,7 @@ const Missions = {
                 }
             }),
             {
-                name: `The + symbol represents the drop chance for each entry. The more + symbols, the higher the chance of that item dropping.`,
+                name: `Символ + означает шанс выпадения. Чем больше плюсов, тем выше шанс получить этот предмет.`,
                 type: 'info'
             },
         ], null, 'Награды');

@@ -1032,9 +1032,9 @@ App.definitions = (() => {
                         App.pet.playCheeringAnimationIfTrue(wasGhost, () => {
                             App.toggleGameplayControls(true);
                             if(wasGhost){
-                                    App.displayPopup(`${App.petDefinition.name} is no longer an immortal!`);
+                                    App.displayPopup(`${App.petDefinition.name} больше не бессмертен(на)!`);
                             } else {
-                                    App.displayPopup(`Nothing happened!`);
+                                    App.displayPopup(`Ничего не произошло!`);
                                 }
                             });
                         });
@@ -2992,6 +2992,36 @@ App.definitions = (() => {
                 description: 'Растения растут быстрее.',
                 type: 'garden',
             },
+        },
+        itemNamesRu: {
+            "rattle": "Погремушка", "grimoire": "Гримуар", "bear": "Медвежонок", "skate": "Скейт", "foxy": "Лисичка",
+            "dumble": "Гантеля", "music player": "Плеер", "ball": "Мяч", "smartphone": "Смартфон", "magazine": "Журнал",
+            "microphone": "Микрофон", "rubicube": "Кубик Рубика", "fidget spinner": "Спиннер", "retroboy": "Ретробой", "robotty": "Робот"
+        },
+        foodNamesRu: {
+            "bread": "Хлеб", "pizza": "Пицца", "hamburger": "Гамбургер", "heart beef": "Сердечко из говядины", "crab dish": "Крабовое блюдо",
+            "paster": "Паста", "king burger": "Королевский бургер", "sushi": "Суши", "sushi set": "Набор суши", "sunny savory soup": "Солнечный суп",
+            "crabstew": "Крабовая похлёбка", "spicy dragon pot": "Острый драконий горшок", "fish dish": "Рыбное блюдо", "forest fungi stew": "Лесное грибное рагу",
+            "star nuggies": "Звёздные наггетсы", "tacos": "Тако", "sambooseh": "Самбуса", "pie": "Пирог", "lasagna": "Лазанья", "red bowol": "Красный борщ",
+            "noodles": "Лапша", "drumstick": "Ножка", "veggiesoup": "Овощной суп", "cheese n breakfast": "Сыр на завтрак", "breadrolls": "Булочки",
+            "sweetbread": "Сладкий хлеб", "meatballs": "Фрикадельки", "xiao long bao": "Сяо лун бао", "spaghetti": "Спагетти", "telesushi": "Телесуши",
+            "s-special dish": "Особое блюдо S", "bunny burger": "Кроличий бургер", "pancakes": "Блинчики", "dumplings": "Пельмени",
+            "mushroom soup": "Грибной суп", "sky bread": "Небесный хлеб", "veggie burger": "Вегетарианский бургер", "puzzlewich": "Пазлвич",
+            "lunchbox": "Ланч-бокс", "veggies roll": "Овощной рулет", "veggies basket": "Корзинка овощей", "veggies stew": "Овощное рагу",
+            "stir veggies": "Тушёные овощи", "melodywich": "Мелодивич", "veggies curry": "Овощное карри", "potato soup": "Картофельный суп",
+            "rice ball": "Рисовый шарик", "hot pot": "Хого", "lovely salad": "Прелестный салат", "fresh salad": "Свежий салат",
+            "vegetables cut": "Нарезка овощей", "roasted sweet potatoes": "Печёный батат", "sweet rainbow": "Сладкая радуга", "koluche": "Колуче",
+            "jelly": "Желе", "chocolate pie": "Шоколадный пирог", "lollipop": "Леденец", "vanilla icecream": "Ванильное мороженое",
+            "strawberry icecream": "Клубничное мороженое", "scoped icecream": "Мороженое шариком", "snacks and bits": "Снеки", "lemonade": "Лимонад",
+            "cupcake": "Кекс", "cappuccino": "Капучино", "strawberry donut": "Клубничный пончик", "choco cake slice": "Кусок шоколадного торта",
+            "cotton candy": "Сахарная вата", "cream icepack": "Крем-пак", "bunny mooko": "Банни муко", "paloodeh": "Палуде",
+            "toasted marshmallows": "Жареный зефир", "watermelon": "Арбуз", "orange juice": "Апельсиновый сок", "snackfin": "Снекфин",
+            "banana": "Банан", "nuts": "Орехи", "santa cake": "Рождественский торт", "kuchice": "Кучице", "spookandy": "Спуканди",
+            "strawberry pie": "Клубничный пирог", "rainbow cake": "Радужный торт", "milk": "Молоко", "medicine": "Лекарство",
+            "sleep replacement": "Замена сна", "expression skill potion": "Зелье эмоций", "logic skill potion": "Зелье логики",
+            "endurance skill potion": "Зелье выносливости", "potion of neglect": "Зелье запущенности", "potion of well behaving": "Зелье послушания",
+            "potion of misbehaving": "Зелье непослушания", "potion of fulfillment": "Зелье удовлетворения", "potion of aging up": "Зелье взросления",
+            "potion of nothingness": "Зелье пустоты", "life essence": "Эссенция жизни"
         }
     }
 })()

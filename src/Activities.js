@@ -2247,9 +2247,9 @@ class Activities {
         }
 
         const openChooseNameDialog = (animalDef, onEndFn) => {
-            return App.displayPrompt(`Choose a name for ${animalDef.getFullCSprite()}:`, [
+            return App.displayPrompt(`Выбери имя для ${animalDef.getFullCSprite()}:`, [
                 {
-                    name: 'set',
+                    name: 'Задать',
                     onclick: (text) => {
                         animalDef.name = text;
                         onEndFn?.();
@@ -2257,7 +2257,7 @@ class Activities {
                     }
                 },
                 {
-                    name: 'cancel',
+                    name: 'Отмена',
                     class: 'back-btn',
                     onclick: () => {}
                 }
@@ -2293,7 +2293,7 @@ class Activities {
                 App.pet.stats.current_endurance += 3;
                 App.displayConfirm(`Еда, которую ты оставил(а), съедена.<br><br>К сожалению, гость на этот раз не остался. Может, повезёт в следующий раз!`, [
                     {
-                        name: 'ok',
+                        name: 'Ок',
                         onclick: () => {}
                     }
                 ]);
@@ -2817,11 +2817,11 @@ class Activities {
                         {
                             _disable: isUnlocked,
                             // name: !isUnlocked ? 'unlock' : 'reward collected',
-                            name: !isUnlocked ? `unlock <div style="margin-left: auto"><i class="fa-solid fa-thumbs-up"></i> ${unlockLikesReq} </div>` : 'reward collected',
+                            name: !isUnlocked ? `Разблокировать <div style="margin-left: auto"><i class="fa-solid fa-thumbs-up"></i> ${unlockLikesReq} </div>` : 'Награда получена',
                             onclick: unlockKey 
                             ? () => {
                                 if((App.temp.online?.hasUploadedPetDef?.interactions || 0) < unlockLikesReq){
-                                    return App.displayPopup(`Недостаточно взаимодействий, чтобы открыть ${name}.`)
+                                    return App.displayPopup(`Недостаточно взаимодействий, чтобы открыть «${name}».`)
                                 }
                                 App.addRecord(unlockKey, 1, true);
                                 App.displayPopup(`<b>${name}</b> открыто!`)
@@ -2829,7 +2829,7 @@ class Activities {
                             } : undefined
                         },
                         {
-                            name: 'close',
+                            name: 'Закрыть',
                             class: 'back-btn',
                             onclick: () => {}
                         }
@@ -3459,7 +3459,7 @@ class Activities {
         }
 
         App.toggleGameplayControls(false, () => {
-            App.displayConfirm(`Pickup ${App.petDefinition.name} from their parents house?`, [
+            App.displayConfirm(`Забрать ${App.petDefinition.name} от родителей?`, [
                 {
                     name: 'yes',
                     onclick: () => {
@@ -3467,7 +3467,7 @@ class Activities {
                     }
                 },
                 {
-                    name: 'no',
+                    name: 'Нет',
                     class: 'back-btn',
                     onclick: () => { }
                 }
@@ -3488,7 +3488,7 @@ class Activities {
             App.pet.x = -30;
             App.pet.targetX = 50;
             App.pet.triggerScriptedState('moving', 4000, null, true, () => {
-                App.displayPopup(`<b>Dr. Banzo:</b><br>let's see...`, 3500);
+                App.displayPopup(`<b>Доктор Банзо:</b><br>Сейчас посмотрим...`, 3500);
                 App.pet.x = '20%';
                 // App.toggleGameplayControls(true);
                 App.pet.inverted = true;
@@ -3496,9 +3496,10 @@ class Activities {
                     let health = App.pet.stats.current_health;
     
                     let state = 'very healthy';
-                    if(health <= App.pet.stats.max_health * 0.20) state = 'very sick';
-                    else if(health <= App.pet.stats.max_health * 0.45) state = 'sick';
-                    else if(health <= App.pet.stats.max_health * 0.75) state = 'healthy'
+                    let stateRu = 'очень здоров(а)';
+                    if(health <= App.pet.stats.max_health * 0.20) { state = 'very sick'; stateRu = 'очень болен(а)'; }
+                    else if(health <= App.pet.stats.max_health * 0.45) { state = 'sick'; stateRu = 'болен(а)'; }
+                    else if(health <= App.pet.stats.max_health * 0.75) { state = 'healthy'; stateRu = 'здоров(а)'; }
                     
                     const onEnd = () => {
                         App.setScene(App.scene.home);
@@ -3509,12 +3510,12 @@ class Activities {
 
                     if(state == 'very sick' || state == 'sick'){
                         App.pet.triggerScriptedState('shocked', 2000, false, true, () => {
-                            App.displayPopup(`${App.pet.petDefinition.name} is ${state}`, 5000, () => App.pet.x = '50%');
+                            App.displayPopup(`${App.pet.petDefinition.name} ${stateRu}`, 5000, () => App.pet.x = '50%');
                             onEnd();
                         })
                     } else {
                         App.pet.triggerScriptedState('cheering_with_icon', 2000, false, true, () => {
-                            App.displayPopup(`${App.pet.petDefinition.name} is ${state}`, 5000, () => App.pet.x = '50%');
+                            App.displayPopup(`${App.pet.petDefinition.name} ${stateRu}`, 5000, () => App.pet.x = '50%');
                             onEnd();
                         })
                     }
@@ -4374,13 +4375,13 @@ class Activities {
         const isAccessoryNew = !App.pet.inventory.accessory[randomAccessory];
         App.pet.inventory.accessory[randomAccessory] = true;
         App.displayPopup(`
-            <small>Gift</small>
+            <small>Подарок</small>
             <div class="pulse">
                 ${App.getAccessoryCSprite(randomAccessory)}
             </div>
-            <div>${randomAccessory}${isAccessoryNew ? App.getBadge('New!') : ''}</div>
+            <div>${randomAccessory}${isAccessoryNew ? App.getBadge('новое!') : ''}</div>
             <div>
-                <small>Accessory</small>
+                <small>Аксессуар</small>
             </div>
         `, 4000, false, true)
         await TimelineDirector.wait(4500);
@@ -4747,9 +4748,9 @@ class Activities {
         await App.wait(4000);
         mainListUI.close();
 
-        App.displayPopup(`Wait...`, 1000);
+        App.displayPopup(`Подожди...`, 1000);
         await App.wait(1000);
-        App.displayPopup('Go!', 1000);
+        App.displayPopup('Марш!', 1000);
         await App.wait(1000);
 
         const userSelectedList = [];
@@ -4762,7 +4763,7 @@ class Activities {
 
             if(isCorrect) setTimeout(() => App.playSound(`resources/sounds/ui_click_03.ogg`, true));
 
-            App.displayPopup( isCorrect ? `Correct ${App.getIcon('check')}` : `Incorrect ${App.getIcon('times')}`, 1000 );
+            App.displayPopup( isCorrect ? `Верно ${App.getIcon('check')}` : `Неверно ${App.getIcon('times')}`, 1000 );
             await App.wait(1000);
 
             if(userSelectedList.length === targetList.length){
@@ -5186,14 +5187,14 @@ class Activities {
                 App.pet.stats.gold += winningGold;
                 App.pet.stats.current_fun += 35;
                 App.pet.playCheeringAnimation(() => {
-                    App.displayPopup(`${App.petDefinition.name} won $${winningGold}`);
+                    App.displayPopup(`${App.petDefinition.name} выиграл(а) $${winningGold}`);
                     App.toggleGameplayControls(true);
                     App.setScene(App.scene.home);
                     App.handlers.open_game_list();
                 });
             } else {
                 App.pet.playAngryAnimation(() => {
-                    App.displayPopup(`${App.petDefinition.name} lost!`);
+                    App.displayPopup(`${App.petDefinition.name} проиграл(а)!`);
                     App.pet.stats.current_fun -= 15;
                     App.toggleGameplayControls(true);
                     App.setScene(App.scene.home);
@@ -6105,14 +6106,14 @@ class Activities {
     }
     static task_endWork(elapsedTime, moneyMade){
         let clampedMoneyMade = clamp(moneyMade, 0, 400);
-        App.displayPopup(`${App.petDefinition.name} worked for ${elapsedTime} seconds`, 2500, () => {
+        App.displayPopup(`${App.petDefinition.name} работал(а) ${elapsedTime} сек`, 2500, () => {
             if(elapsedTime > 10){
                 App.pet.stats.gold += clampedMoneyMade;
             } else clampedMoneyMade = 0;
             App.pet.stats.current_fun -= elapsedTime / 3.5;
             App.pet.stats.current_expression -= 0.5;
             App.pet.stats.current_logic += 3;
-            App.displayConfirm(`${App.petDefinition.name} made $${clampedMoneyMade}`, [
+            App.displayConfirm(`${App.petDefinition.name} заработал(а) $${clampedMoneyMade}`, [
                 {
                     name: 'ok',
                     onclick: () => {
