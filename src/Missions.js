@@ -32,31 +32,31 @@ const Missions = {
         earn_school_points: 'earn_school_points',
     },
     TYPE_DESCRIPTIONS: {
-        food: 'Eat food',
-        pat: 'Pat your pet',
-        gift: 'Give gift to a friend',
-        cook: 'Cook',
-        win_game: 'Win at the game center',
-        online_interact: 'Interact with online players',
-        buy_food: 'Buy food or snacks',
-        playdate: 'Invite a friend over',
-        check_social_post: 'Check social media posts',
-        find_park_friend: 'Find a park friend',
-        use_bath: 'Bathe your pet',
-        use_toilet: 'Use the toilet',
-        clean_room: 'Clean the room',
-        visit_doctor: 'Visit the doctor',
-        fulfill_want: "Fulfill your pet's want",
-        play_item: 'Play with an item',
-        visit_online_hub: 'Visit Hubchi',
-        visit_mall: 'Visit the mall',
-        visit_market: 'Visit the market',
-        plant_in_garden: 'Plant something in the garden',
-        water_crop: 'Water your garden plant',
-        play_with_animal: 'Play with your pet animal',
-        feed_animal: 'Feed your pet animal',
-        order_food: 'Order something on Snapmeal',
-        earn_school_points: 'Earn points at school',
+        food: 'Съесть еду',
+        pat: 'Погладить питомца',
+        gift: 'Подарить подарок другу',
+        cook: 'Приготовить блюдо',
+        win_game: 'Выиграть в игровом центре',
+        online_interact: 'Взаимодействовать с игроками онлайн',
+        buy_food: 'Купить еду или перекус',
+        playdate: 'Пригласить друга в гости',
+        check_social_post: 'Проверить соцсети',
+        find_park_friend: 'Найти друга в парке',
+        use_bath: 'Искупать питомца',
+        use_toilet: 'Сходить в туалет',
+        clean_room: 'Убрать комнату',
+        visit_doctor: 'Сходить к врачу',
+        fulfill_want: 'Исполнить желание питомца',
+        play_item: 'Поиграть с предметом',
+        visit_online_hub: 'Посетить Hubchi',
+        visit_mall: 'Посетить ТЦ',
+        visit_market: 'Посетить рынок',
+        plant_in_garden: 'Посадить что-то в саду',
+        water_crop: 'Полить растение в саду',
+        play_with_animal: 'Поиграть с питомцем-животным',
+        feed_animal: 'Покормить питомца-животное',
+        order_food: 'Заказать еду в Snapmeal',
+        earn_school_points: 'Заработать очки в школе',
     },
     init: function(data){
         if(data?.current) this.current = data?.current;
@@ -104,7 +104,7 @@ const Missions = {
                 pts: 25,
             }
 
-            mission.description = `${Missions.TYPE_DESCRIPTIONS[mission.type]} ${mission.targetCount} ${mission.targetCount === 1 ? 'time' : 'times'}.`
+            mission.description = `${Missions.TYPE_DESCRIPTIONS[mission.type]} ${mission.targetCount} ${mission.targetCount === 1 ? 'раз' : 'раза'}.`
             
             this.current.push(mission);
         }
@@ -316,7 +316,7 @@ const Missions = {
                 name: `The + symbol represents the drop chance for each entry. The more + symbols, the higher the chance of that item dropping.`,
                 type: 'info'
             },
-        ], null, 'Rewards');
+        ], null, 'Награды');
         return list;
     },
     hasUnclaimedRewards: function(){
@@ -392,7 +392,7 @@ const Missions = {
                 }
             }),
             {
-                name: `refreshes ${moment(Missions.refreshTime).fromNow()}`,
+                name: `Обновление ${moment(Missions.refreshTime).fromNow()}`,
                 type: 'info'
             },
         ], null, 'Missions')

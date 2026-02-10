@@ -810,11 +810,11 @@ const App = {
                 if(!addEvent(codeEventId, () => {
                     App.pet.stats.gold += 250;
                 })) return showAlreadyUsed();
-                App.displayPopup(`Congratulations! ${App.petDefinition.name} got $250!`, 5000);
+                App.displayPopup(`Поздравляем! ${App.petDefinition.name} получил(а) 250 монет!`, 5000);
                 break;
             case "PRNCSS":
                 if(!addEvent(codeEventId, () => {
-                    App.displayPopup(`Success!`, 5000, () => {
+                    App.displayPopup(`Успех!`, 5000, () => {
                         App.closeAllDisplays();
                         Activities.redecorRoom();
                         App.scene.home.image = App.definitions.room_background.princess.image;
@@ -822,7 +822,7 @@ const App = {
                 })) return showAlreadyUsed();
                 break;
             case "HESOYAM":
-                App.displayPopup(`All you had to do ...`, 5000, () => {
+                App.displayPopup(`Нужно было только...`, 5000, () => {
                     App.pet.stats.gold += 2500;
                     App.pet.stats.current_care = App.pet.stats.max_care;
                     App.pet.stats.current_health = App.pet.stats.max_health;
@@ -830,7 +830,7 @@ const App = {
                 break;
             case "UXTW77":
                 if(!addEvent(codeEventId, () => {
-                    App.displayPopup(`Sorry for the inconvenience, here's 250 mission pts and $400!`, 5000, () => {
+                    App.displayPopup(`Извини за неудобства! Вот 250 очков миссий и 400 монет!`, 5000, () => {
                         App.pet.stats.gold += 400;
                         Missions.currentPts += 250;
                     });
@@ -838,7 +838,7 @@ const App = {
                 break;
             case "TAMAWEBGIFT":
                 if(!addEvent(codeEventId, () => {
-                    App.displayPopup(`You've redeemed <b>$1000</b>!<br><br> Thanks for playing!`, 5000, () => {
+                    App.displayPopup(`Получено <b>1000 монет</b>!<br><br>Спасибо за игру!`, 5000, () => {
                         App.pet.stats.gold += 1000;
                     });
                 })) return showAlreadyUsed();
@@ -851,7 +851,7 @@ const App = {
                     const goldAmount = 200, missionPtsAmount = 50;
                     App.pet.stats.gold += goldAmount;
                     Missions.currentPts += missionPtsAmount;
-                    App.displayPopup(`You've redeemed <b>$${goldAmount}</b>, <b>${missionPtsAmount} Mission pts</b>!`, 4000);
+                    App.displayPopup(`Получено <b>${goldAmount} монет</b>, <b>${missionPtsAmount} очков миссий</b>!`, 4000);
                 })) return showAlreadyUsed();
                 break;
             case "JINIINTHEBOTTLE":
@@ -859,7 +859,7 @@ const App = {
                     const goldAmount = 3000, missionPtsAmount = 500;
                     App.pet.stats.gold += goldAmount;
                     Missions.currentPts += missionPtsAmount;
-                    App.displayPopup(`You've redeemed <b>$${goldAmount}</b>, <b>${missionPtsAmount} Mission pts</b>!`, 4000);
+                    App.displayPopup(`Получено <b>${goldAmount} монет</b>, <b>${missionPtsAmount} очков миссий</b>!`, 4000);
                 })) return showAlreadyUsed();
                 break;
             case "DISCORD5K":
@@ -867,7 +867,7 @@ const App = {
                     const goldAmount = 5000, missionPtsAmount = 500;
                     App.pet.stats.gold += goldAmount;
                     Missions.currentPts += missionPtsAmount;
-                    App.displayPopup(`You've redeemed <b>$${goldAmount}</b>, <b>${missionPtsAmount} Mission pts</b>!`, 4000);
+                    App.displayPopup(`Получено <b>${goldAmount} монет</b>, <b>${missionPtsAmount} очков миссий</b>!`, 4000);
                 })) return showAlreadyUsed();
                 break;
             default:
@@ -1068,7 +1068,7 @@ const App = {
                     name: 'send',
                     onclick: (data) => {
                         if(!data) return true;
-                        App.displayPopup(`<b>Suggestion sent! thanks!</b><br> here's $200 for participating!`, 4000, () => {
+                        App.displayPopup(`<b>Предложение отправлено! Спасибо!</b><br>Вот 200 монет за участие!`, 4000, () => {
                             App.pet.x = '50%';
                             App.pet.playCheeringAnimation();
                         });
@@ -1087,10 +1087,10 @@ const App = {
 
 
         if(addEvent(`discord_server_02_notice`, () => {
-            App.displayConfirm(`<b>We have a Discord server!</b><br>Join us for early sneak peeks at upcoming features, interact with our community, and more!`, [
+            App.displayConfirm(`<b>У нас есть Discord-сервер!</b><br>Присоединяйся: анонсы, общение с комьюнити и многое другое!`, [
                 {
                     link: App.routes.DISCORD,
-                    name: 'join (+$200)',
+                    name: 'Вступить (+200)',
                     onclick: () => {
                         App.pet.stats.gold += 200;
                         App.sendAnalytics('discord_02_notice_accept');
@@ -1098,10 +1098,10 @@ const App = {
                     },
                 }, 
                 {
-                    name: 'cancel',
+                    name: 'Позже',
                     class: 'back-btn',
                     onclick: () => {
-                        App.displayPopup('You can join the server through <b>Settings > Join Discord</b> if you ever change your mind', 5000)
+                        App.displayPopup('Вступить можно в <b>Настройки → Discord</b>, если передумаешь', 5000)
                     }
                 }
             ]);
@@ -1110,7 +1110,7 @@ const App = {
 
         /* if(App.isSalesDay()){
             if(addEvent(`sales_day_${dayId}_notice`, () => {
-                App.displayConfirm(`<b>discount day!</b><br>Shops are selling their products at a discounted rate! Check them out and pile up on them!`, [
+                App.displayConfirm(`<b>День скидок!</b><br>В магазинах скидки! Заходи и запасайся!`, [
                     {
                         name: 'ok',
                         class: 'solid primary',
@@ -2095,7 +2095,7 @@ const App = {
                     _disable: App.petDefinition.lifeStage === PetDefinition.LIFE_STAGE.elder,
                     name: 'Next Evolution',
                     onclick: () => {
-                        return App.displayConfirm(`Do you want to see ${App.petDefinition.name}'s <b>next possible evolution(s)</b> based on different <b>care ratings</b>?`, [
+                        return App.displayConfirm(`Показать возможные <b>эволюции</b> ${App.petDefinition.name} в зависимости от <b>уровня ухода</b>?`, [
                             {
                                 name: 'yes ($100)',
                                 onclick: () => {
@@ -2122,7 +2122,7 @@ const App = {
                             && App.petDefinition.lifeStage >= PetDefinition.LIFE_STAGE.adult
                         )
                         App.handlers.open_friends_list((friendDef) => {
-                            return App.displayConfirm(`Do you want to see ${friendDef.name} and ${App.petDefinition.name}'s baby <b>offspring</b>?`, [
+                            return App.displayConfirm(`Показать <b>потомка</b> ${friendDef.name} и ${App.petDefinition.name}?`, [
                                 {
                                     name: 'yes ($100)',
                                     onclick: () => {
@@ -2153,8 +2153,8 @@ const App = {
                 {
                     name: '<i class="fa-solid fa-search icon"></i> search',
                     onclick: (query) => {
-                        if(!query.trim()) return App.displayPopup('Please enter a valid username.');
-                        const searchingPopup = App.displayPopup(`Searching for "${query}"...`, App.INF);
+                        if(!query.trim()) return App.displayPopup('Введите корректное имя пользователя.');
+                        const searchingPopup = App.displayPopup(`Ищем «${query}»...`, App.INF);
                         App.apiService.getPetDef(query)
                             .then(data => {
                                 App.sendAnalytics('username_search', JSON.stringify({
@@ -2162,11 +2162,11 @@ const App = {
                                     username: query
                                 }));
                                 
-                                if(!data.status) return App.displayPopup(`Username not found <br> <small>(Make sure you are searching for user id, not pet name)</small>`);
+                                if(!data.status) return App.displayPopup(`Пользователь не найден<br><small>(Ищи по id пользователя, не по имени питомца)</small>`);
 
                                 // if(data.data === hasUploadedPetDef.data) {
                                 if(App.userName.indexOf(query) === 0){
-                                    return App.displayPopup(`Something went wrong!`);
+                                    return App.displayPopup(`Что-то пошло не так!`);
                                 }
                                 
                                 prompt.close();
@@ -2175,18 +2175,18 @@ const App = {
                                     const def = new PetDefinition(parsedJson).setStats({
                                         is_ghost: parsedJson.is_ghost || 0,
                                     })
-                                    App.displayConfirm(`Do you want to add ${def.getCSprite()} ${def.name} to your friends list?`, [
+                                    App.displayConfirm(`Добавить ${def.getCSprite()} ${def.name} в список друзей?`, [
                                         {
                                             name: 'Да',
                                             onclick: () => {
                                                 App.closeAllDisplays();
                                                 const addedFriend = App.petDefinition.addFriend(def, 1);
                                                 if (addedFriend) {
-                                                    App.displayPopup(`${def.getCSprite()} ${def.name} has been added to the friends list!`, 3000);
+                                                    App.displayPopup(`${def.getCSprite()} ${def.name} добавлен(а) в список друзей!`, 3000);
                                                     App.apiService.addInteraction(def.ownerId);
                                                     onAddCallback?.(def);
                                                 } else {
-                                                    App.displayPopup(`You are already friends with ${def.name}`, 3000);
+                                                    App.displayPopup(`Вы уже в друзьях с ${def.name}`, 3000);
                                                 }
                                                 return false;
                                             }
@@ -2198,7 +2198,7 @@ const App = {
                                         },
                                     ])  
                                 } catch(e) {
-                                    App.displayPopup('Something went wrong!');
+                                    App.displayPopup('Что-то пошло не так!');
                                 }
                             })
                             .finally(() => searchingPopup.close())
@@ -2232,17 +2232,17 @@ const App = {
             return prompt;
         },
         show_rating_dialog: function(){
-            return App.displayConfirm(`If you're enjoying the game, please consider <b>rating it</b> on Itch. Your feedback makes a huge difference and helps us a lot!`,
+            return App.displayConfirm(`Если игра нравится, поставь <b>оценку</b> на Itch. Твой отзыв очень поможет!`,
                 [
                     {
                         link: App.routes.ITCH_REVIEW,
-                        name: `rate!`,
+                        name: `Оценить!`,
                         onclick: () => {
                             App.sendAnalytics('rate_accept');
                         }
                     },
                     {
-                        name: `cancel`,
+                        name: `Позже`,
                         class: 'back-btn',
                         onclick: () => {
                             App.sendAnalytics('rate_decline');
@@ -2295,7 +2295,7 @@ const App = {
 
                         App.pet.petDefinition.name = value;
                         App.save();
-                        App.displayPopup(`Name set to "${App.pet.petDefinition.name}"`)
+                        App.displayPopup(`Имя установлено: «${App.pet.petDefinition.name}»`)
                     }
                 },
             ], App.pet.petDefinition.name || '');
@@ -2316,9 +2316,9 @@ const App = {
                     name: 'set',
                     onclick: (username) => {
                         username = (username || '').toString().toLowerCase();
-                        if(!validate(username)) return App.displayPopup('Username is not valid. Please use A-Z letters and numbers.');
-                        if(username.length < 5) return App.displayPopup('Your username cannot have less than 5 characters.');
-                        if(username.length > 18) return App.displayPopup('Your username cannot have more than 18 characters.');
+                        if(!validate(username)) return App.displayPopup('Недопустимое имя. Используй латинские буквы A–Z и цифры.');
+                        if(username.length < 5) return App.displayPopup('Имя не может быть короче 5 символов.');
+                        if(username.length > 18) return App.displayPopup('Имя не может быть длиннее 18 символов.');
                         App.userName = username;
                         App.save();
                         App.sendAnalytics('new_user', username);
@@ -2523,10 +2523,10 @@ const App = {
                     name: `остаться у родителей`,
                     onclick: () => {
                         if((App.hour < App.constants.PARENT_DAYCARE_START || App.hour >= App.constants.PARENT_DAYCARE_END)){
-                            return App.displayPopup(`You can only leave ${App.petDefinition.name} at their parents house between <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> and <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>`, 4000)
+                            return App.displayPopup(`Оставить ${App.petDefinition.name} у родителей можно только с <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> до <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>`, 4000)
                         }
 
-                        App.displayConfirm(`${App.petDefinition.name} will be with their parents, who will look after them from <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> to <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>, is that ok?`, [
+                        App.displayConfirm(`${App.petDefinition.name} останется у родителей с <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_START)}</b> до <b>${App.formatTo12Hours(App.constants.PARENT_DAYCARE_END)}</b>. Всё верно?`, [
                             {
                                 name: 'Да',
                                 onclick: () => {
@@ -2575,7 +2575,7 @@ const App = {
                     name: `furniture`,
                     onclick: () => {
                         if(!App.isRoomFurnishable()){
-                            return App.displayConfirm(`Your room came fully furnished.<br><br>Would you like to remove the default furniture set and customize it?`, [
+                            return App.displayConfirm(`В комнате уже есть мебель.<br><br>Убрать стандартный набор и настроить по своему?`, [
                                 {
                                     name: 'Да',
                                     onclick: () => {
@@ -2837,11 +2837,11 @@ const App = {
                                     const loadingPopup = App.displayPopup('loading...');
                                     const charCode = await App.getSaveCode();
                                     loadingPopup.close();
-                                    App.displayConfirm(`Here you'll be able to copy your unique save code and continue your playthrough on another device`, [
+                                    App.displayConfirm(`Здесь можно скопировать код сохранения и продолжить игру на другом устройстве`, [
                                         {
                                             name: 'ok',
                                             onclick: () => {
-                                                App.displayConfirm(`After copying the code, open Tamaweb on another device and paste the code in <b>settings > input code</b>`, [
+                                                App.displayConfirm(`После копирования открой Tamaweb на другом устройстве и вставь код в <b>Настройки → Ввести код</b>`, [
                                                     {
                                                         name: 'ok',
                                                         onclick: () => {
@@ -2907,7 +2907,7 @@ const App = {
                                 name: `active mods (${App.mods.length})`,
                                 onclick: () => {
                                     // App.displayPopup(JSON.stringify(App.mods, null, 2), 5000);
-                                    if(!App.mods.length) return App.displayPopup('No mods installed');
+                                    if(!App.mods.length) return App.displayPopup('Моды не установлены');
 
                                     const activeModsList = App.displayList(
                                         App.mods.map(
@@ -2928,14 +2928,14 @@ const App = {
                                                             {
                                                                 name: 'uninstall',
                                                                 onclick: () => {
-                                                                    App.displayConfirm(`Are you sure you want to uninstall <b>${modInfo.name}</b>?`, [
+                                                                    App.displayConfirm(`Удалить мод <b>${modInfo.name}</b>?`, [
                                                                         {
                                                                             name: 'Да',
                                                                             onclick: () => {
                                                                                 App.mods.splice(App.mods.indexOf(modInfo), 1);
                                                                                 App.save();
                                                                                 App.sendAnalytics('mod_uninstall', modInfo.name);
-                                                                                App.displayPopup(`<b>${modInfo.name}</b> uninstalled successfully, refreshing...`, null, () => location.reload());
+                                                                                App.displayPopup(`<b>${modInfo.name}</b> удалён. Обновление...`, null, () => location.reload());
                                                                             }
                                                                         },
                                                                         {
@@ -2976,7 +2976,7 @@ const App = {
                                 if(duplicateIndex != -1){
                                     App.mods[duplicateIndex] = json;
                                     App.sendAnalytics('mod_update', json.name);
-                                    App.displayPopup(`<b>${json.name}</b> updated! <br><br> refreshing...`, 2000, () => {
+                                    App.displayPopup(`<b>${json.name}</b> обновлён!<br><br>Обновление...`, 2000, () => {
                                         location.reload();
                                     })
                                 } else {

@@ -279,7 +279,7 @@ class Activities {
         const negativeWords = ["cruel", "greedy", "deceitful", "jealous", "arrogant", "spiteful", "manipulative", "selfish", "reckless", "hostile", "sneaky", "vain", "stubborn", "ruthless", "vindictive", "malicious", "conniving", "callous", "petulant", "domineering", "depraved", "vengeful", "insidious", "belligerent", "narcissistic", "scheming", "abrasive", "boastful", "obnoxious", "irritable", "sullen", "grating", "unrepentant", "malcontent", "overbearing"];
         const positiveWords = ["kind", "gentle", "honest", "loyal", "graceful", "hopeful", "pure", "generous", "patient", "forgiving", "humble", "joyful", "loving", "wise", "nurturing", "benevolent", "compassionate", "altruistic", "serene", "dignified", "virtuous", "steadfast", "tenderhearted", "uplifting", "magnanimous", "devoted", "sincere", "chivalrous", "empathetic", "faithful", "radiant", "merciful", "gracious", "principled", "respectful", "gentlehearted"];
 
-        App.displayPopup(`Try to use the words that best describe the ${isTargetNegative ? App.constants.SPANS.monster : App.constants.SPANS.angel}`, 3000);
+        App.displayPopup(`Подбери слова, которые лучше всего описывают ${isTargetNegative ? App.constants.SPANS.monster : App.constants.SPANS.angel}`, 3000);
         await TimelineDirector.wait(3000);
         
         let remainingRounds = 3, wonRounds = 0;
@@ -322,16 +322,16 @@ class Activities {
                     }
                     await TimelineDirector.wait(2000);
 
-                    App.displayPopup(hasWon ? `${friendSpan} was impressed!` : `${friendSpan} was not impressed!`, 2000);
+                    App.displayPopup(hasWon ? `${friendSpan} впечатлён(а)!` : `${friendSpan} не впечатлён(а)!`, 2000);
                     await TimelineDirector.wait(1900);
 
                     if(hasWon){
-                        App.displayConfirm(`Do you want to add ${friendSpan} to your friends list?`, [
+                        App.displayConfirm(`Добавить ${friendSpan} в список друзей?`, [
                             {
                                 name: 'yes',
                                 onclick: () => {
                                     App.petDefinition.addFriend(otherPetDef, 1);
-                                    App.displayPopup(`${friendSpan} has been added to the friends list!`, 3000);
+                                    App.displayPopup(`${friendSpan} добавлен(а) в список друзей!`, 3000);
                                 }
                             },
                             {
@@ -945,7 +945,7 @@ class Activities {
 
         await main.moveTo({x: '25%', speed: 0.025});
         await teacher.bob({animation: 'idle_side', maxCycles: 1});
-        const messageBubble = App.displayMessageBubble('Welcome!', teacher.actor.petDefinition.getFullCSprite());
+        const messageBubble = App.displayMessageBubble('Добро пожаловать!', teacher.actor.petDefinition.getFullCSprite());
         main.setState('cheering');
         teacher.setState('cheering');
         await TimelineDirector.wait(2000);
@@ -1646,7 +1646,7 @@ class Activities {
             reviverNpc.removeObject();
             App.setScene(App.scene.home);
             App.toggleGameplayControls(true);
-            App.displayConfirm(`<b>${App.petDefinition.name} has been revived!</b> <br><br> please take better care of them from now on since you won't be able to revive them again!`, [
+            App.displayConfirm(`<b>${App.petDefinition.name} воскрешён(а)!</b><br><br>Заботься о нём лучше — повторно воскресить будет нельзя!`, [
                 {
                     name: 'ok',
                     onclick:() => {}
@@ -1666,7 +1666,7 @@ class Activities {
             const rabbitHoleDefinition = App.definitions.rabbit_hole_activities.find(activity => activity.name === App.pet.stats.current_rabbit_hole.name);
 
             if(!isInterrupted){
-                App.displayConfirm(`Homeworld Getaway activity <b>"${App.pet.stats.current_rabbit_hole.name}"</b> has ended and ${App.petDefinition.name} is back home!`, [
+                App.displayConfirm(`Занятие <b>«${App.pet.stats.current_rabbit_hole.name}»</b> закончилось, ${App.petDefinition.name} вернулся(ась) домой!`, [
                     {
                         name: 'ok',
                         onclick: () => {}
@@ -1951,11 +1951,11 @@ class Activities {
             }
 
             App.pet.stats.current_fun += 40;
-            App.displayConfirm(`${App.petDefinition.name} and ${otherPetDef.name} had a wonderful time together! <br><br> Do you want to propose to ${otherPetDef.name}?`, [
+            App.displayConfirm(`${App.petDefinition.name} и ${otherPetDef.name} отлично провели время!<br><br>Сделать предложение ${otherPetDef.name}?`, [
                 {
                     name: 'propose',
                     onclick: () => {
-                        App.displayConfirm(`${App.petDefinition.name} and <div>${otherPetDef.getCSprite()} ${otherPetDef.name}</div> will get married and you'll receive their egg, are you sure?`, [
+                        App.displayConfirm(`${App.petDefinition.name} и <div>${otherPetDef.getCSprite()} ${otherPetDef.name}</div> поженятся, ты получишь их яйцо. Продолжить?`, [
                             {
                                 name: 'yes',
                                 onclick: () => {
@@ -2137,7 +2137,7 @@ class Activities {
                                 {
                                     name: '<span style="color: red;"><i class="icon fa-solid fa-skull icon"></i> Dead ones</span>',
                                     onclick: () => {
-                                        return App.displayConfirm(`Are you sure you want to remove all dead plants?`, [
+                                        return App.displayConfirm(`Удалить все мёртвые растения?`, [
                                             {
                                                 name: 'yes',
                                                 onclick: () => {
@@ -2162,7 +2162,7 @@ class Activities {
                                 // {type: 'separator',}
                             ] : [],
                             onPlantClick: (plant, plantIndex) => {
-                                return App.displayConfirm(`Are you sure you want to remove <b>${plant.name} (${Plant.AGE_LABELS[plant.age]})</b>?`, [
+                                return App.displayConfirm(`Удалить <b>${plant.name} (${Plant.AGE_LABELS[plant.age]})</b>?`, [
                                     {
                                         name: 'yes',
                                         onclick: () => {
@@ -2253,7 +2253,7 @@ class Activities {
                     onclick: (text) => {
                         animalDef.name = text;
                         onEndFn?.();
-                        App.displayPopup(`Name set to ${animalDef.name}!`);
+                        App.displayPopup(`Имя установлено: ${animalDef.name}!`);
                     }
                 },
                 {
@@ -2285,13 +2285,13 @@ class Activities {
                     sprite: randomFromArray(ANIMAL_CHARACTERS)
                 });
                 App.animals.list.push(newAnimal);
-                App.displayPopup(`A new animal ${newAnimal.getFullCSprite()} has chosen your backyard as their new home. Take good care of them!`, 3000, () => openChooseNameDialog(newAnimal));
+                App.displayPopup(`Новый питомец ${newAnimal.getFullCSprite()} поселился у тебя во дворе. Хорошо заботься о нём!`, 3000, () => openChooseNameDialog(newAnimal));
                 App.pet.stats.current_expression += 2;
                 App.sendAnalytics('animal_arrived');
             } else if(App.animals.treatBiteCount > 2) {
                 resetTreat();
                 App.pet.stats.current_endurance += 3;
-                App.displayConfirm(`The food you placed out earlier is gone.<br><br>Unfortunately, its visitor chose not to stay this time, maybe you'll meet them next time!`, [
+                App.displayConfirm(`Еда, которую ты оставил(а), съедена.<br><br>К сожалению, гость на этот раз не остался. Может, повезёт в следующий раз!`, [
                     {
                         name: 'ok',
                         onclick: () => {}
@@ -2420,7 +2420,7 @@ class Activities {
                                         {
                                             name: `<span style="color: red;">Release</span>`,
                                             onclick: () => {
-                                                return App.displayConfirm(`Are you sure you want release ${animalDef.name} back into the wild?`, [
+                                                return App.displayConfirm(`Отпустить ${animalDef.name} на волю?`, [
                                                     {
                                                         name: 'yes',
                                                         onclick: async () => {
@@ -2441,7 +2441,7 @@ class Activities {
                                                             App.toggleGameplayControls(false, previousController);
                                                             App.pet.stopScriptedState();
 
-                                                            App.displayPopup(`${animalDef.name} has been released back into the wild.`, 4000);
+                                                            App.displayPopup(`${animalDef.name} отпущен(а) на волю.`, 4000);
                                                             App.animals.list.splice(
                                                                 App.animals.list.indexOf(animalDef),
                                                                 1
@@ -2496,7 +2496,7 @@ class Activities {
                                                     App.animals.treatBiteCount = 0;
                                                     App.animals.nextAttractMs = getNextAttractMs(Date.now());
                                                     App.reloadScene(true);
-                                                    App.displayPopup("The food has been placed!<br><br>Check back in a few hours to see if you've gotten a visitor!", 4000);
+                                                    App.displayPopup("Еда выставлена!<br><br>Проверь через несколько часов — возможно, придёт гость!", 4000);
                                                     return true;
                                                 }
                                                 return App.handlers.open_food_list({buyMode: false, filterType: 'food', useMode: onUseFn, age: PetDefinition.LIFE_STAGE.adult});
@@ -2641,17 +2641,17 @@ class Activities {
             addInteraction(def);
             Missions.done(Missions.TYPES.online_interact);
             Activities.invitePlaydate(def, App.scene.online_hub, () => {
-                App.displayConfirm(`Do you want to add ${def.getCSprite()} ${def.name} to your friends list?`, [
+                App.displayConfirm(`Добавить ${def.getCSprite()} ${def.name} в друзья?`, [
                     {
                         name: 'yes',
                         onclick: () => {
                             App.closeAllDisplays();
                             const addedFriend = App.petDefinition.addFriend(def, 1);
                             if (addedFriend) {
-                                App.displayPopup(`${def.getCSprite()} ${def.name} has been added to the friends list!`, 3000);
+                                App.displayPopup(`${def.getCSprite()} ${def.name} добавлен(а) в список друзей!`, 3000);
                                 addInteraction(def);
                             } else {
-                                App.displayPopup(`You are already friends with ${def.name}`, 3000);
+                                App.displayPopup(`Вы уже в друзьях с ${def.name}`, 3000);
                             }
                             return false;
                         }
@@ -2666,7 +2666,7 @@ class Activities {
             })
         }
         const handleDate = (def) => {
-            return App.displayConfirm(`Do you want to go on a date with <div>${def.getCSprite()} ${def.name}</div>?`, [
+            return App.displayConfirm(`Сходить на свидание с <div>${def.getCSprite()} ${def.name}</div>?`, [
                 {
                     name: 'yes',
                     onclick: () => {
@@ -2735,16 +2735,16 @@ class Activities {
             ])
         }
         const handleUploadCharacter = () => {
-            return App.displayConfirm(`Do you want to upload ${App.petDefinition.name} to HUBCHI so that other players can see and interact with them?`, [
+            return App.displayConfirm(`Загрузить ${App.petDefinition.name} в HUBCHI, чтобы другие игроки могли видеть и взаимодействовать с ним?`, [
                 {
                     name: 'yes',
                     onclick: async () => {
-                        const popup = App.displayPopup('Uploading...', App.INF);
+                        const popup = App.displayPopup('Загрузка...', App.INF);
                         const {status} = await App.apiService.addPetDef();
                         popup.close();
                         App.closeAllDisplays();
                         hasUploadedPetDef.status = status;
-                        App.displayPopup('Success!');
+                        App.displayPopup('Готово!');
                     }
                 },
                 {
@@ -2755,9 +2755,9 @@ class Activities {
             ])
         }
         const handleSyncCharacter = () => {
-            return App.displayPopup('Syncing is now done automatically when entering Hubchi, this option will be removed later.', 4000);
+            return App.displayPopup('Синхронизация с Hubchi теперь выполняется автоматически при входе. Эта опция будет удалена позже.', 4000);
 
-            const confirm = App.displayConfirm(`Do you want to update your HUBCHI persona to be in sync with ${App.petDefinition.name}'s latest appearance?`, [
+            const confirm = App.displayConfirm(`Обновить персонажа в HUBCHI по текущему виду ${App.petDefinition.name}?`, [
                 {
                     name: 'yes',
                     onclick: async () => {
@@ -2778,7 +2778,7 @@ class Activities {
             return true;
         }
         const handleReturnHome = () => {
-            return App.displayConfirm(`Are you sure you want to return home?`, [
+            return App.displayConfirm(`Вернуться домой?`, [
                 {
                     name: 'yes',
                     onclick: async () => {
@@ -2821,10 +2821,10 @@ class Activities {
                             onclick: unlockKey 
                             ? () => {
                                 if((App.temp.online?.hasUploadedPetDef?.interactions || 0) < unlockLikesReq){
-                                    return App.displayPopup(`You don't have enough interactions to unlock ${name}.`)
+                                    return App.displayPopup(`Недостаточно взаимодействий, чтобы открыть ${name}.`)
                                 }
                                 App.addRecord(unlockKey, 1, true);
-                                App.displayPopup(`<b>${name}</b> unlocked!`)
+                                App.displayPopup(`<b>${name}</b> открыто!`)
                                 App.sendAnalytics('unlocked_hubchi_reward_item', name);
                             } : undefined
                         },
@@ -3052,7 +3052,7 @@ class Activities {
         })
 
         App.toggleGameplayControls(false, () => {
-            App.displayConfirm(`Are you sure you want to end ${App.petDefinition.name}'s vacation?`, [
+            App.displayConfirm(`Завершить отпуск ${App.petDefinition.name}?`, [
                 {
                     name: 'yes',
                     onclick: end
@@ -3185,7 +3185,7 @@ class Activities {
                                 }
                                 if(!failed){
                                     const amount = resultFoodName ? random(1, 3) : 1;
-                                    App.displayPopup(`${App.petDefinition.name} <br>made x${amount}<br> <b>${randomFoodName}</b>!`, 3000, () => {
+                                    App.displayPopup(`${App.petDefinition.name}<br>приготовил(а) x${amount}<br><b>${randomFoodName}</b>!`, 3000, () => {
                                         end();
                                         App.pet.playCheeringAnimation();
                                         App.pet.stats.current_fun += random(10, 25);
@@ -3194,7 +3194,7 @@ class Activities {
                                         else App.definitions.achievements.camera_cook_x_times.advance();
                                     });
                                 } else {
-                                    App.displayPopup(`${App.petDefinition.name} <br>failed to make anything edible!<br>`, 3000, () => {
+                                    App.displayPopup(`${App.petDefinition.name}<br>не смог(ла) приготовить ничего съедобного!`, 3000, () => {
                                         end();
                                         App.pet.stats.current_fun -= random(5, 15);
                                         App.pet.playUncomfortableAnimation();

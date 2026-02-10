@@ -1445,21 +1445,21 @@ App.definitions = (() => {
         furniture: [
             // mushroom set
             {
-                name: 'Mushroom Couch',
+                name: 'Грибной диван',
                 image: 'resources/img/furniture/mushroom_couch.png',
                 id: "mushroom_couch",
                 price: 200,
                 isNew: false,
             },
             {
-                name: 'Mushroom Pot',
+                name: 'Грибной горшок',
                 image: 'resources/img/furniture/mushroom_pot.png',
                 id: "mushroom_pot",
                 price: 150,
                 isNew: false,
             },
             {
-                name: 'Mushroom Lamp',
+                name: 'Грибная лампа',
                 image: 'resources/img/furniture/mushroom_lamp.png',
                 id: "mushroom_lamp",
                 price: 200,
@@ -1467,21 +1467,21 @@ App.definitions = (() => {
 
             // vintage orange set
             {
-                name: 'Vintage Couch',
+                name: 'Винтажный диван',
                 image: 'resources/img/furniture/vintage_couch.png',
                 id: "vintage_couch",
                 price: 200,
                 isNew: false,
             },
             {
-                name: 'Vintage Cabinet',
+                name: 'Винтажный шкаф',
                 image: 'resources/img/furniture/vintage_cabinet.png',
                 id: "vintage_cabinet",
                 price: 150,
                 isNew: false,
             },
             {
-                name: 'Vintage Plant',
+                name: 'Винтажное растение',
                 image: 'resources/img/furniture/vintage_plant.png',
                 id: "vintage_plant",
                 price: 150,
@@ -1490,35 +1490,35 @@ App.definitions = (() => {
 
             // valentine set
             {
-                name: 'Valentine Bear',
+                name: 'Медвежонок Валентин',
                 image: 'resources/img/furniture/bear_valentine.png',
                 id: "bear_valentine",
                 price: 200,
                 isNew: false,
             },
             {
-                name: 'Valentine Heart',
+                name: 'Сердце Валентин',
                 image: 'resources/img/furniture/broken_heart_valentine.png',
                 id: "broken_heart_valentine",
                 price: 160,
                 isNew: false,
             },
             {
-                name: 'Valentine Cake',
+                name: 'Торт Валентин',
                 image: 'resources/img/furniture/cake_valentine.png',
                 id: "cake_valentine",
                 price: 120,
                 isNew: false,
             },
             {
-                name: 'Valentine Gift',
+                name: 'Подарок Валентин',
                 image: 'resources/img/furniture/gift_valentine.png',
                 id: "gift_valentine",
                 price: 120,
                 isNew: false,
             },
             {
-                name: 'Valentine Chair',
+                name: 'Стул Валентин',
                 image: 'resources/img/furniture/chair_valentine.png',
                 id: "chair_valentine",
                 price: 150,
@@ -1527,31 +1527,31 @@ App.definitions = (() => {
     
             // gothic set
             {
-                name: 'Gothic Bookcase',
+                name: 'Готический книжный шкаф',
                 image: 'resources/img/furniture/bookcase_gothic.png',
                 id: "bookcase_gothic",
                 price: 150,
             },
             {
-                name: 'Gothic Chair',
+                name: 'Готический стул',
                 image: 'resources/img/furniture/chair_gothic.png',
                 id: "chair_gothic",
                 price: 150,
             },
             {
-                name: 'Gothic Doll',
+                name: 'Готическая кукла',
                 image: 'resources/img/furniture/doll_gothic.png',
                 id: "doll_gothic",
                 price: 120,
             },
             {
-                name: 'Gothic Vase',
+                name: 'Готическая ваза',
                 image: 'resources/img/furniture/vase_gothic.png',
                 id: "vase_gothic",
                 price: 120,
             },
             {
-                name: 'Gothic Statue',
+                name: 'Готическая статуя',
                 image: 'resources/img/furniture/statue_gothic.png',
                 id: "statue_gothic",
                 price: 150,
@@ -1559,123 +1559,123 @@ App.definitions = (() => {
     
             // arcade
             {
-                name: 'Arcade Machines',
+                name: 'Игровые автоматы',
                 image: 'resources/img/furniture/arcade_machines.png',
                 id: "arcade_machines",
                 price: 120,
             },
             {
-                name: 'Claw Machine',
+                name: 'Когтевой автомат',
                 image: 'resources/img/furniture/arcade_machine.png',
                 id: "claw_machine",
                 price: 120,
             },
             {
-                name: 'Race Car Mini Bed',
+                name: 'Кроватка-машинка',
                 image: 'resources/img/furniture/race_car_minibed.png',
                 id: "race_car_minibed",
                 price: 120,
             },
             {
-                name: 'Arcade Sofa',
+                name: 'Аркадный диван',
                 image: 'resources/img/furniture/sofa_arcade.png',
                 id: "sofa_arcade",
                 price: 120,
             },
     
             {
-                name: 'CLR bookshelf',
+                name: 'Цветная полка',
                 image: 'resources/img/furniture/bookcase_colorful.png',
                 id: "bookcase_colorful",
                 price: 120,
             },
             {
-                name: 'Pink Sofa',
+                name: 'Розовый диван',
                 image: 'resources/img/furniture/sofa_pink.png',
                 id: "sofa_pink",
                 price: 150,
             },
     
             {
-                name: 'Wooden bookshelf',
+                name: 'Деревянная полка',
                 image: 'resources/img/furniture/bookcase_wooden.png',
                 id: "bookcase_wooden",
                 price: 100,
             },
             {
-                name: 'Woodleather Sofa',
+                name: 'Диван дерево-кожа',
                 image: 'resources/img/furniture/sofa_woodleather.png',
                 id: "sofa_woodleather",
                 price: 120,
             },
     
             {
-                name: 'Peachy Pot',
+                name: 'Персиковый горшок',
                 image: 'resources/img/furniture/pot_peachy.png',
                 id: "pot_peachy",
                 price: 80,
             },
             {
-                name: 'Peachy Sofa',
+                name: 'Персиковый диван',
                 image: 'resources/img/furniture/sofa_peachy.png',
                 id: "sofa_peachy",
                 price: 150,
             },
     
             {
-                name: 'Blue Stand',
+                name: 'Синяя тумба',
                 image: 'resources/img/furniture/stand_blue.png',
                 id: "stand_blue",
                 price: 80,
             },
             {
-                name: 'Blue Sofa',
+                name: 'Синий диван',
                 image: 'resources/img/furniture/sofa_blue.png',
                 id: "sofa_blue",
                 price: 80,
             },
     
             {
-                name: 'Lite Stand',
+                name: 'Радужная тумба',
                 image: 'resources/img/furniture/stand_rainbow.png',
                 id: "stand_rainbow",
                 price: 120,
             },
             {
-                name: 'Lite Sofa',
+                name: 'Радужный диван',
                 image: 'resources/img/furniture/sofa_rainbow.png',
                 id: "sofa_rainbow",
                 price: 120,
             },
             {
-                name: 'Astra Sofa',
+                name: 'Диван Астра',
                 image: 'resources/img/furniture/sofa_astra.png',
                 id: "sofa_astra",
                 price: 120,
             },
             {
-                name: 'Astra Cactus',
+                name: 'Кактус Астра',
                 image: 'resources/img/furniture/pot_astra.png',
                 id: "pot_astra",
                 price: 120,
             },
 
             {
-                name: 'Big Pumpkin',
+                name: 'Большая тыква',
                 image: 'resources/img/furniture/big_pumpkin.png',
                 id: "big_pumpkin",
                 price: 100,
                 isNew: false,
             },
             {
-                name: 'Small Pumpkin',
+                name: 'Маленькая тыква',
                 image: 'resources/img/furniture/small_pumpkin.png',
                 id: "small_pumpkin",
                 price: 100,
                 isNew: false,
             },
             {
-                name: 'Spooky Tree',
+                name: 'Жуткое дерево',
                 image: 'resources/img/furniture/spooky_tree.png',
                 id: "spooky_tree",
                 price: 50,
@@ -1684,73 +1684,73 @@ App.definitions = (() => {
     
             // misc
             {
-                name: 'Pink Pillow Pile',
+                name: 'Гора розовых подушек',
                 image: 'resources/img/furniture/pink_pillow.png',
                 id: "pink_pillow",
                 price: 150,
             },
             {
-                name: 'Girl Doll',
+                name: 'Кукла-девочка',
                 image: 'resources/img/furniture/doll_girl.png',
                 id: "doll_girl",
                 price: 200,
             },
             {
-                name: 'Dog Box',
+                name: 'Собачий домик',
                 image: 'resources/img/furniture/dog_box.png',
                 id: "dog_box",
                 price: 200,
             },
             {
-                name: 'Ret TV',
+                name: 'Ретро-телевизор',
                 image: 'resources/img/furniture/tv_01.png',
                 id: "tv_01",
                 price: 300,
             },
             {
-                name: 'Orange Chair',
+                name: 'Оранжевое кресло',
                 image: 'resources/img/furniture/chair_orange.png',
                 id: "chair_orange",
                 price: 200,
             },
             {
-                name: 'Sty Table',
+                name: 'Стильный стол',
                 image: 'resources/img/furniture/table_01.png',
                 id: "table_01",
                 price: 250,
             },
             {
-                name: 'Pink Fan',
+                name: 'Розовый вентилятор',
                 image: 'resources/img/furniture/fan.png',
                 id: "pink_fan",
                 price: 120,
             },
             {
-                name: 'CC Cabinet',
+                name: 'Шкафчик CC',
                 image: 'resources/img/furniture/cabinet_01.png',
                 id: "cabinet_01",
                 price: 120,
             },
             {
-                name: 'CC Plant',
+                name: 'Растение CC',
                 image: 'resources/img/furniture/plant_01.png',
                 id: "plant_01",
                 price: 100,
             },
             {
-                name: 'Seafloor Sofa',
+                name: 'Диван «Морское дно»',
                 image: 'resources/img/furniture/seafloor_sofa.png',
                 id: "seafloor_sofa",
                 price: 120,
             },
             {
-                name: 'Clood Sofa',
+                name: 'Диван Клуди',
                 image: 'resources/img/furniture/sofa_clood.png',
                 id: "sofa_clood",
                 price: 120,
             },
             {
-                name: 'Futura Sofa',
+                name: 'Диван Футура',
                 image: 'resources/img/furniture/sofa_futura.png',
                 id: "sofa_futura",
                 price: 120,
@@ -1758,21 +1758,21 @@ App.definitions = (() => {
     
             // craftables
             {
-                name: 'Bird Stand',
+                name: 'Птичий стенд',
                 image: 'resources/img/furniture/bird_stand.png',
                 id: 'bird_stand',
                 isCraftable: true,
                 craftingRecipe: ['kilmari', 'blue tulip', 'bamboo'],
             },
             {
-                name: 'Collage Bucket',
+                name: 'Ведро-коллаж',
                 image: 'resources/img/furniture/bucket_collage.png',
                 id: 'bucket_collage',
                 isCraftable: true,
                 craftingRecipe: ['cyan tulip', 'tetrocana', 'hephasto'],
             },
             {
-                name: 'Sun Lamp',
+                name: 'Солнечная лампа',
                 image: 'resources/img/furniture/lamp_sun.png',
                 id: 'lamp_sun',
                 isCraftable: true,
@@ -1786,14 +1786,14 @@ App.definitions = (() => {
                 }
             },
             {
-                name: 'Cloud Sofa',
+                name: 'Облачный диван',
                 image: 'resources/img/furniture/sofa_cloud.png',
                 id: 'sofa_cloud',
                 isCraftable: true,
                 craftingRecipe: ['orange tulip', 'bamboo', 'purple tulip'],
             },
             {
-                name: 'City Couch',
+                name: 'Городской диван',
                 image: 'resources/img/furniture/couch_city.png',
                 id: "couch_city",
                 isCraftable: true,
@@ -1801,7 +1801,7 @@ App.definitions = (() => {
                 craftingRecipe: ['tetrocana', 'orange tulip', 'lucrios'],
             },
             {
-                name: 'City Toy Car',
+                name: 'Городская машинка',
                 image: 'resources/img/furniture/city_toy_car.png',
                 id: "city_toy_car",
                 isCraftable: true,
@@ -1809,7 +1809,7 @@ App.definitions = (() => {
                 craftingRecipe: ['lucrios', 'tetrocana', 'yellow tulip'],
             },
             {
-                name: 'City Plant',
+                name: 'Городское растение',
                 image: 'resources/img/furniture/plant_city.png',
                 id: "plant_city",
                 isCraftable: true,
@@ -1901,7 +1901,7 @@ App.definitions = (() => {
             },
             {
                 image: 'resources/img/ui/shell_background_cloof_01.png',
-                name: 'cloofy',
+                name: 'Клуфи',
                 isNew: false,
                 onlineShopAccessible: true,
                 unlockLikes: 30,
@@ -1912,12 +1912,12 @@ App.definitions = (() => {
         /* BACKGROUND PATTERNS */
         background_pattern: [
             {
-                name: 'Snowy Stars',
+                name: 'Снежные звёзды',
                 image: 'resources/img/ui/bg_pattern_01.png',
                 isNew: false,
             },
             {
-                name: 'Shells',
+                name: 'Ракушки',
                 image: 'resources/img/ui/bg_pattern_02.png',
                 isNew: false,
             },
